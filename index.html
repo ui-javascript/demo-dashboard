@@ -1,0 +1,271 @@
+<!--
+    Function: 公共导航条设计
+    Authur: Luo_0412
+    Date： 2016-8-28
+    Update: 新增了搜索引擎接口
+ -->
+
+<!DOCTYPE html>
+<html>
+<head lang="zh-CN">
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+  	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Qmen | 仅学习测试 </title>
+    <!-- css样式 
+          ============================= -->
+    <link href="css/libs/bootstrap.min.css" rel="stylesheet">
+    <link href="css/libs/jPushMenu.css" rel="stylesheet">
+    <!-- 本页面的css样式 
+          ============================= -->
+    <link href="css/qmen.css" rel="stylesheet"> 
+    <style>
+      .cbp-spmenu {
+          overflow-y:hidden;
+          margin-top: 50px;
+          text-align: center;
+      }
+      .cbp-spmenu a {
+          text-decoration: none;
+      }
+      .dropdown-toggle span {
+        margin-left: 4px;
+      }
+    </style>
+</head>
+<body>
+
+<div class="cbp-spmenu cbp-spmenu-vertical cbp-spmenu-right" >
+    <h3>个人设置</h3>
+    <a href="#">换肤/裸奔</a>
+    <a href="#">定制面板</a>
+    <a href="#">互换名片</a>
+    <a href="#">背景音乐</a>
+    <a href="#">我的云盘</a>
+    <a href="#">移魂大法</a>
+</div>
+
+
+<!-- 顶部导航条 
+      ============================= -->
+<div class="navbar navbar-default navbar-fixed-top" role="navigation">
+    <div class="load-bar">
+      <div class="bar"></div>
+			<!-- <div class="bar"></div>
+			<div class="bar"></div>			 -->
+    </div>
+    <div class="container">
+        <div class="navbar-header">
+            <button aria-controls="navbar" aria-expanded="false" data-target="#navbar" data-toggle="collapse" class="navbar-toggle collapsed" type="button">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a href="https://www.baidu.com" class="text-center"><img class="img-responsive center-block" src="images/QmenLogo.png" alt="Qmen Logo"/></a>
+        </div>
+        <div class="navbar-collapse collapse" id="navbar">
+            <ul class="nav navbar-nav">
+                <li><a href="" class="text-center">3.1415926</a></li>
+                <div class="visible-xs divider" role="presentation"></div>
+                <li><a class="text-center" href="">Bootstrap</a></li>
+                <div class="visible-xs divider" role="presentation"></div>
+                <li><a class="text-center" href="">D3社区</a></li>
+                <li><a class="text-center" href="" id="typetype_area"></a></li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+                <li><a class="text-center" href="">今日头条</a></li>
+                <li class="dropdown hidden-xs">
+                    <a class="dropdown-toggle text-center" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">校园生活<span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+<!--                         <li><a href="#">Another action</a></li>
+                        <li role="separator" class="divider"></li> -->
+                        <li><a class="text-center" href="http://www.verydemo.com/one_c52.html">图书分享</a></li>
+                        <li><a class="text-center" href="http://huodong.5sing.kugou.com/">校园翻唱榜</a></li>
+                        <li><a class="text-center" href="http://huodong.5sing.kugou.com/">斗图</a></li>
+                        <li><a class="text-center" href="http://huodong.5sing.kugou.com/">大神</a></li>
+                        <li><a class="text-center" href="http://huodong.5sing.kugou.com/">创业讯息</a></li>
+                        <li><a class="text-center" href="http://huodong.5sing.kugou.com/">实习推荐</a></li>
+                    </ul>
+                </li>
+                <li><a class="visible-xs text-center" href="http://www.verydemo.com/one_c52.html">图书分享</a></li>
+                <li><a class="visible-xs text-center" href="http://huodong.5sing.kugou.com/">校园翻唱榜</a></li>
+                <li><a class="visible-xs text-center" href="http://www.verydemo.com/one_c52.html">斗图</a></li>
+                <li><a class="visible-xs text-center" href="http://huodong.5sing.kugou.com/">大神</a></li>
+                <li><a class="visible-xs text-center" href="http://www.verydemo.com/one_c52.html">创业讯息</a></li>
+                <li><a class="visible-xs text-center" href="http://huodong.5sing.kugou.com/">实习推荐</a></li>
+
+  <!--               <li class="text-center"><button class="btn btn-default btn-sm text-justify navbar-btn" href="">登陆</button></li> -->
+                <!-- <li class="text-center"><button class="btn btn-default btn-sunken btn-sm text-justify navbar-btn" href="">登 陆</button></li> -->
+                <!-- <li class="text-center"><button class="btn btn-default btn-sm text-justify navbar-btn toggle-menu menu-right push-body" type="button">个人设置</button></li> -->
+                <li class="text-center"><button type="button" class="btn btn-primary navbar-btn btn-sm text-justify toggle-menu menu-right push-body" aria-label="Left Align"><span class="glyphicon glyphicon-menu-hamburger" aria-hidden="true"></span></button></li>
+                            
+            </ul>
+
+        </div>
+    </div>
+</div> <!-- /. 顶部导航条 -->
+
+
+
+
+<div class="container">
+
+<div class="row">
+<div class="left-nav col-md-4">
+  <!-- Accordion example -->
+  
+  <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+    <div class="panel panel-default">
+      <div class="panel-heading" role="tab" id="headingOne">
+        <h4 class="panel-title">
+          <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+            搜索引擎
+          </a>
+        </h4>
+      </div>
+      <div id="collapseOne" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">
+        <div class="panel-body">
+          <form class="form-inline" action="http://www.baidu.com/s" target="_blank">
+            <input class="form-control" type="text" name="word" value="" placeholder="输入想要搜索的关键词"/>
+            <button class="btn btn-primary" type="submit">百度搜索</button>
+          </form>
+          <form class="form-inline" action="http://www.sogou.com/web" target="_blank">
+            <input class="form-control" type="text" name="word" value="" placeholder="输入想要搜索的关键词"/>
+            <button class="btn btn-default" type="submit">搜狗搜索</button>
+          </form>
+        </div>
+      </div>
+    </div>
+    <div class="panel panel-default">
+      <div class="panel-heading" role="tab" id="headingTwo">
+        <h4 class="panel-title">
+          <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+            折线图
+          </a>
+        </h4>
+      </div>
+      <div id="collapseTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
+        <div class="panel-body">
+          Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
+        </div>
+      </div>
+    </div>
+    <div class="panel panel-default">
+      <div class="panel-heading" role="tab" id="headingThree">
+        <h4 class="panel-title">
+          <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+            饼图
+          </a>
+        </h4>
+      </div>
+      <div id="collapseThree" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingThree">
+        <div class="panel-body">
+          Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
+        </div>
+      </div>
+    </div>
+    <div class="panel panel-default">
+      <div class="panel-heading" role="tab" id="headingThree">
+        <h4 class="panel-title">
+          <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseFour" aria-expanded="false" aria-controls="collapseThree">
+            其他图表
+          </a>
+        </h4>
+      </div>
+      <div id="collapseFour" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingThree">
+        <div class="panel-body">
+        </div>
+      </div>
+    </div>
+  </div> <!-- /. Accordion example --> 
+</div> <!-- /. left-nav  -->
+
+
+<div class="col-md-8">
+    <div class="col-md-12">
+      <div id="carousel-example-generic" class="carousel slide right-carousel" data-ride="carousel">
+
+        <!-- Indicators -->
+        <ol class="carousel-indicators">
+          <li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
+          <li data-target="#carousel-example-generic" data-slide-to="1"></li>
+          <li data-target="#carousel-example-generic" data-slide-to="2"></li>
+        </ol>
+
+        <!-- Wrapper for slides -->
+        <div class="carousel-inner" role="listbox">
+          <div class="item active">
+            <img src="images/img_demo1.jpg" class="img-responsive" alt="...">
+          </div>
+          <div class="item">
+            <img src="images/img_demo2.jpg" class="img-responsive" alt="..." >
+          </div>
+          <div class="item">
+            <img src="images/img_demo3.jpg" class="img-responsive" alt="..." >
+          </div>
+          </div>
+        </div>
+
+    </div>
+
+    <div class="col-md-12">
+      <div class="row right-thumbnail text-center">
+        <div class="col-md-4">
+          <a href="#" class="thumbnail">
+            <img src="images/img_hi.jpg" alt="...">
+          </a>
+        </div>
+        <div class="col-md-4">
+          <a href="#" class="thumbnail">
+            <img src="images/img_hi.jpg" alt="...">
+          </a>
+        </div>
+        <div class="col-md-4">
+          <a href="#" class="thumbnail">
+            <img src="images/img_hi.jpg" alt="...">
+          </a>
+        </div>
+      </div>
+    </div>
+    
+</div> <!-- /. col-md-8 -->
+
+
+</div>
+</div> <!-- /. container -->
+
+
+
+
+
+    <!-- jQuery v2.1.4 -->
+    <script src="js/libs/jquery.min.js"></script>
+    <!-- Bootstrap的js文件 -->
+    <script src="js/libs/bootstrap.min.js"></script>
+    <script src="js/libs/typetype.min.js"></script>    
+    <script src="js/libs/jPushMenu.js"></script>        
+    <script>
+        $(document).ready(function() {
+            $('.toggle-menu').jPushMenu();
+
+
+              // hljs.configure({languages:['js']})
+              // hljs.highlightBlock($('#code')[0])
+
+              // $('#usage').click(function(){
+              //   this.focus()
+              //   this.select()
+              // })
+
+
+              $('#typetype_area').typetype("装逼是人类进步的阶梯！！",{
+                t:3000,
+                e:0.02
+              })
+              .fadeOut(500)
+              .delay(1000)
+              .fadeIn();
+        });
+    </script>
+</body>
+</html>

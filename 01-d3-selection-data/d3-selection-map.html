@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>映射map</title>
+    <!-- <link rel="stylesheet" href=""> -->
+</head>
+<body>
+<main>
+    
+</main>
+
+<script src="http://cdn.bootcss.com/d3/3.5.17/d3.js"></script>
+<script>
+// 构建映射 =========================
+var dataset = [ {id:1000, color:"red"},
+                {id:1001, color:"green"},
+                {id:1002, color:"blue"}];
+var map = d3.map(dataset, function(d){return d.id; });
+
+console.log(map.has(1001));
+console.log(map.has(1003));
+console.log(map.get(1001));
+console.log(map.get(1003));
+
+map.set(1001, {id:1001, color:"yellow"});
+map.set(1003, {id:1003, color:"white"});
+
+map.remove(1001);
+map.values();
+map.entries();
+
+map.forEach(function(key, value) {
+    console.log(key);
+    console.log(value);
+});
+
+map.empty();
+map.size();
+
+</script>    
+</body>
+</html>

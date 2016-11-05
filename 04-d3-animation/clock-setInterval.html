@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>时钟 setInterval方法实现</title>
+	<!-- <link rel="stylesheet" href=""> -->
+	<style> 
+    .time {
+    	font-family: Cursive;
+    	font-size: 40px;
+    	stroke: black;
+    	stroke-width: 2;
+    }
+	</style>
+</head>
+<body>
+<main>
+	
+</main>
+<aside>
+	
+</aside>
+
+<script src="../js/libs/d3.min.js" charset="utf-8"></script>
+<script>  	   
+// 创建svg
+var width  = 500;	
+var height = 500;
+var svg = d3.select("main")			
+			.append("svg")			
+			.attr("width", width)	
+			.attr("height", height);
+	
+var timeText = svg.append("text")
+					.attr("x",100)
+					.attr("y",100)
+					.attr("class","time")
+					.text(getTimeString());
+
+setInterval(updateTime,1000);
+
+function updateTime(){
+	timeText.text(getTimeString());
+}
+			
+function getTimeString(){
+	var time = new Date();
+	var hours = time.getHours();
+	var minutes = time.getMinutes();
+	var seconds = time.getSeconds();
+	// 处理小于10的数字
+	hours = hours < 10 ? "0" + hours : hours;
+	minutes = minutes < 10 ? "0" + minutes : minutes;
+	seconds = seconds < 10 ? "0" + seconds : seconds;
+	return hours + ":" + minutes + ":" + seconds;
+}
+			
+</script> 	
+</body>
+</html>

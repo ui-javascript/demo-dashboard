@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>ECharts 柱状和折线图</title>
+    <script src="js/echarts.min.js"></script>
+    <script src="js/jquery.min.js"></script>
+</head>
+<body>
+    <div id="main" style="width: 600px;height:400px;"></div>
+    <script type="text/javascript">
+
+        /*初始化echarts实例=====================*/
+        var myChart = echarts.init(document.getElementById('main')); 
+
+        /* 指定图表的配置项和数据===============*/
+        myChart.setOption({
+        title : {
+            text: '一周内的乘车总人数统计报表',
+            subtext: '404厂车系统'
+        },
+        tooltip : {
+            trigger: 'axis'
+        },
+        legend: {
+            data:['理论总人数','实际总人数']
+        },
+        toolbox: {
+            show : true,
+            feature : {
+                mark : {show: true},
+                dataView : {show: true, readOnly: false},
+                magicType : {show: true, type: ['line', 'bar']},
+                restore : {show: true},
+                saveAsImage : {show: true}
+            }
+        },
+        calculable : true,
+        xAxis : [
+            {
+                type : 'category',
+                boundaryGap : false,
+                data : ['周一','周二','周三','周四','周五','周六','周日']
+            }
+        ],
+        yAxis : [
+            {
+                type : 'value',
+                axisLabel : {
+                    formatter: '{value} 人'
+                }
+            }
+        ],
+        series : [
+            {
+                name:'理论总人数',
+                type:'line',
+                data:[],
+                // markPoint : {
+                //     data : [
+                //         {type : 'max', name: '最大值'},
+                //         {type : 'min', name: '最小值'}
+                //     ]
+                // },
+                markLine : {
+                    data : [
+                        {type : 'average', name: '平均值'}
+                    ]
+                }
+            },
+            {
+                name:'实际总人数',
+                type:'line',
+                data:[],
+                // markPoint : {
+                //     data : [
+                //         {name : '周最低', value : -2, xAxis: 1, yAxis: -1.5}
+                //     ]
+                // },
+                markLine : {
+                    data : [
+                        {type : 'average', name : '平均值'}
+                    ]
+                }
+            }
+        ]
+        });
+
+
+        /*读入json文件=========================*/
+        $.get('data.json').done(function (data) {
+            myChart.setOption({
+                series: [
+                {
+                    // 根据名字对应到相应的系列
+                    name: '理论总人数',
+                    data: data[0].data
+                    
+                }
+                ,
+                {
+                    // 根据名字对应到相应的系列
+                    name: '实际总人数',
+                    data: data[1].data
+                }
+                ]
+            });
+        });
+                            
+    </script>
+</body>
+</html>

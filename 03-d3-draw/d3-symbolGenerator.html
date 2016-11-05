@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>符号生成器</title>
+    <link rel="stylesheet" href="../css/d3-basic.css">
+    <style>
+
+    </style>
+</head>
+<body>
+
+<!-- svg区 -->
+<main></main>
+<!-- 辅助区 -->
+<aside></aside>
+
+<script src="http://cdn.bootcss.com/d3/3.5.17/d3.js"></script>
+<script>
+// 创建svg
+var width  = 500;   
+var height = 500; 
+var color = d3.scale.category20b(); // 配色方案  
+var svg = d3.select("main")         
+            .append("svg")          
+            .attr("width", width)   
+            .attr("height", height);
+
+// 数组
+var n = 30; // 数组长度
+var dataset = [];
+
+// 给数组添加符号元素
+for(var i=0;i<n;i++){
+    dataset.push( { 
+        size: Math.random() * 30 + 200,
+        type: d3.svg.symbolTypes[ Math.floor( Math.random() * d3.svg.symbolTypes.length )]
+    } );
+}
+// floor 向下取整 
+// round 四舍五入 
+// ceil 向上取整
+
+console.log(dataset);
+
+//创建一个符号生成器
+var symbol = d3.svg.symbol()
+                .size(function(d){ return d.size; })
+                .type(function(d){ return d.type; }); // 两个访问器
+       
+//添加路径
+svg.selectAll()
+    .data(dataset)
+    .enter()
+    .append("path")
+    .attr("d",function(d){ return symbol(d); }) 
+    .attr("transform",function(d,i){
+        var x = 100 + i%5 * 20;
+        var y = 100 + Math.floor(i/5) * 20;
+        return "translate(" + x + "," + y + ")"; // 换行
+    })
+    .attr("fill",function(d,i){ return color(i); });    
+</script>    
+</body>
+</html>

@@ -1,0 +1,328 @@
+<!--
+    Function: d3过渡
+    Authur: Luo_0412
+    Date： 2016-8-16
+ -->
+
+<!DOCTYPE html>
+<html>
+<head lang="zh-CN">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Qmen | d3过渡 </title>
+    <style type="text/css">
+        svg rect{
+            fill: orange;
+        }
+        svg circle{
+            fill: orange;
+        }
+    </style>
+</head>
+<body>
+
+    <div id="delay-svg-demo"></div>
+    <div id="ease-svg-demo"></div>
+    <div id="attrBetween-svg-demo"></div>
+    <div id="styleTween-svg-demo"></div>
+    <text>10</text>
+    <div id="remove-svg-demo"></div>
+    <div id="select-svg-demo"></div>
+    <div id="selectAll-svg-demo"></div>
+    <div id="filter-svg-demo"></div>
+    <div id="transition-svg-demo"></div>
+
+    <!-- jQuery v2.1.4 -->
+    <script src="../js/libs/jquery.min.js"></script>
+    <!-- Bootstrap的js文件 -->
+    <!-- <script src="js/libs/bootstrap.min.js"></script> -->
+    <!-- d3的js文件 -->
+    <script type="text/javascript" src="../js/libs/d3.v3.js"></script>
+    <script type="text/javascript">
+        //向body标签增加svg子元素
+        var delay_svg = d3.select('#delay-svg-demo')
+            .append('svg')
+            .attr({
+                "width": 960,
+                "height": 500,
+            });
+
+        //循环追加rect元素
+        for (var i = 0; i < 20; i++) {
+            delay_svg.append('rect')
+                .attr({
+                    x: 20 + i * 15,
+                    y: 10,
+                    width: 10, height: 10
+                });
+        }
+
+        delay_svg.selectAll('rect')
+            .transition()
+            .duration(500)
+            .delay(function (d, i) {    //设置延迟时间
+                return i * 500;
+            })
+            .attr('transform', 'rotate(45)');   //设置动画结束时，rect元素顺时针旋转45度
+
+
+        //向body标签增加svg子元素
+        var ease_svg = d3.select('#ease-svg-demo')
+            .append('svg')  
+            .attr({
+                "width": 700,
+                "height": 500,
+            });
+        
+        //追加两个测试圆
+        for (var i = 0; i < 2; i++) {
+            ease_svg.append('circle')
+                .attr({
+                    cx: 100,
+                    cy: 100 + i * 200,
+                    r: 50
+                });
+        };
+
+        ease_svg.selectAll('circle')
+            .transition()   //开启动画
+            .duration(500)  //设置动画持续时间500毫秒
+            .ease(Math.sqrt)    //用自定义的缓动函数为Math.sqrt
+            .attr('r', 100)
+            .transition()
+            .duration(500)
+            .ease("poly",3) //直接指定缓动函数为poly(3)
+            .attr('r', 50)
+            .transition()
+            .duration(500)
+            .ease(d3.ease("bounce"))    //用d3.ease("bounce")返回缓动函数
+            .attr('r', 100)
+
+
+        //向body标签增加svg子元素
+        var attrBet_svg = d3.select('#attrBetween-svg-demo')
+            .append('svg')  
+            .attr({
+                "width": 700,
+                "height": 500,
+            });
+
+        //追加测试圆
+        attrBet_svg.append('circle')
+            .attr({
+                cx: 100,
+                cy: 100,
+                r: 50
+            });
+        
+
+        attrBet_svg.select('circle')
+            .transition()   //开启动画
+            .duration(1500) //设置动画持续时间1500毫秒
+            .attrTween("r", tween)  //对半径属性调用自定义的补间函数
+
+        function tween(d, i, a) {   //补间函数，设置半径从50过渡到100
+            return d3.interpolateNumber(a,2*a);
+        }
+
+        // 一秒变白
+        d3.select("body")
+            .style("background-color", "black")
+            .transition()
+                .duration(1000)
+            .style("background-color", "white");
+
+
+        //向body标签增加svg子元素
+        var styleTween_svg = d3.select('#styleTween-svg-demo')
+            .append('svg')  
+            .attr({
+                "width": 700,
+                "height": 500,
+            });
+
+        //追加测试圆
+        styleTween_svg.append('circle')
+            .attr({
+                cx: 100,
+                cy: 100,
+                r: 50
+            });
+        
+
+        styleTween_svg.select('circle')
+            .transition()   //开启动画
+            .duration(500) //设置动画持续时间1500毫秒
+            .styleTween("fill", tween_nd)  //对填充样式调用自定义的补间函数
+
+        function tween_nd(d, i, a) {//补间函数，设置圆的填充颜色从绿色过渡到橘黄色
+            return d3.interpolate("green", "orange");
+        }
+
+        //向body标签增加svg子元素
+        var text_svg = d3.select('body')
+            .append('svg')
+            .attr({
+                "width": 700,
+                "height": 500,
+            });
+
+        text_svg.append('text')
+            .attr({
+                x: 100,
+                y: 100
+            }).text("Haha");
+        
+
+        //设置过渡开始后元素的文本，取代原有的子元素
+        text_svg.select('text')
+            .transition()   //开启动画
+            .duration(1500) //设置动画持续时间1500毫秒
+            .attr({
+                x: 150,
+                y: 150
+            })
+            .text("Oh, yeah");  //设置过渡开始后元素的文本
+
+        //使用自定义补间函数过渡文本内容
+        d3.select("text").transition()
+            .duration(7500)
+            .tween("text", function() {
+                var interpolate = d3.interpolate(d3.select(this).text(), 100);  //过渡区间为[10,100]
+                return function(t) { d3.select(this).text(interpolate(t)); };
+            });
+
+
+        //向body标签增加svg子元素
+        var remove_svg = d3.select('#remove-svg-demo')
+            .append('svg')
+            .attr({
+                "width": 700,
+                "height": 500,
+            });
+
+        //追加测试圆
+        remove_svg.append('circle')
+            .attr({
+                cx: 100,
+                cy: 100,
+                r: 50
+            });
+
+        //在过渡结束后删除元素
+        remove_svg.selectAll('circle')
+            .transition()   //开启动画
+            .duration(1500) //设置动画持续时间1500毫秒
+            .attr('r', 0)   //设置动画结束时，rect元素顺时针旋转45度
+            .remove();
+
+
+        var select_svg = d3.select('#select-svg-demo')
+                .append('svg')
+                .attr({
+                    "width":700,
+                    "height":500
+                });
+
+
+        //追加测试元素
+        select_svg.append('g').attr('transform', 'translate(0, 0)')
+            .selectAll('rect')
+            .data([50,250])
+            .enter()
+            .append('rect')
+            .attr({
+                x: function(d){ return d;}, 
+                y: 50, 
+                width: 50, height: 50
+            });
+        
+        select_svg.selectAll('g')
+            .transition()   //开启动画
+            .duration(500)  //设置动画持续时间500毫秒
+            .attr('transform', "translate(0, 50)")  //设置过渡结束时矩形向下平移50个像素
+            .select('rect')
+            .attr('width', 100);//设置矩形过渡结束后的宽为100
+
+
+        //向body标签增加svg子元素
+        var selectAll_svg = d3.select('#selectAll-svg-demo')
+            .append('svg')
+            .attr({
+                "width": 700,
+                "height": 500,
+            });
+
+        //追加3个矩形元素
+        selectAll_svg.append("g").attr('transform', 'translate(0, 0)');
+        for (var i = 0; i < 3; i++) {
+            selectAll_svg.select('g').append('rect')
+                .attr({
+                    x: i * 50,
+                    y: 0,
+                    width: 40, height: 40
+                });
+        }
+
+        selectAll_svg.select('g')
+                .transition()
+                .duration(500)
+                .attr('transform', 'translate(100, 100)')   //设置分组元素平移变换
+                .selectAll('rect')  //为所有选中的子元素设置过渡
+                .delay(function (d, i) {    //设置延迟时间
+                    return i * 500;
+                })
+                .attr('transform', 'rotate(45)');   //设置动画结束时，rect元素顺时针旋转45度
+
+        //向body标签增加svg子元素
+        var filter_svg = d3.select('#filter-svg-demo')
+            .append('svg')
+            .attr({
+                "width": 700,
+                "height": 500,
+            });
+
+        //循环追加8个rect元素
+        for (var i = 0; i < 8; i++) {
+            filter_svg.append('rect')
+                .attr({
+                    x: 200 + i * 50,
+                    y: 100,
+                    width: 40, height: 40
+                });
+        }
+
+        //过滤过渡
+        filter_svg.selectAll('rect')
+            .transition()   //开启动画
+            .duration(1500) //设置动画持续时间1500毫秒
+            .filter(":nth-child(odd)")  //过滤奇元素
+            .attr('transform', 'rotate(45)');   //设置动画结束时，索引为奇数的矩形元素顺时针旋转45度
+
+        //向body标签增加svg子元素
+        var transition_svg = d3.select('#transition-svg-demo')
+            .append('svg')  
+            .attr({
+                "width": 700,
+                "height": 500,
+            });
+
+        //追加测试圆
+        transition_svg.append('circle')
+            .attr({
+                cx: 100,
+                cy: 100,
+                r: 5
+            });
+
+        //新过渡
+        transition_svg.select('circle')
+            .transition().duration(500) //开启过渡
+            .attr("r", 50)  //设置过渡结束后半径为50
+            .transition().duration(500).delay(1000) //开启新过渡
+            .attr("r", 5)   //设置过渡结束后半径为5
+
+    </script>
+</body>
+</html>

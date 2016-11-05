@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>区域生成器</title>
+    <link rel="stylesheet" href="../css/d3-basic.css">
+    <style>
+
+    </style>
+</head>
+<body>
+
+<!-- svg区 -->
+<main></main>
+<!-- 辅助区 -->
+<aside></aside>
+
+<script src="http://cdn.bootcss.com/d3/3.5.17/d3.js"></script>
+<script>
+
+// 待可视化的数据
+var dataset = [80,120,130,70,60,90];  
+
+// 创建svg
+var width  = 500;   
+var height = 300;
+var svg = d3.select("main")       
+            .append("svg")         
+            .attr("width", width)  
+            .attr("height", height);
+
+// 创建一个区域生成器
+// 数据访问器 x() y0() y1() 
+var areaPath = d3.svg.area()
+                    .x(function(d,i){ return 50 + i * 80; })
+                    .y0(function(d,i){ return height/2; })
+                    .y1(function(d,i){ return height/2 - d; })
+                    // .interpolate("cardinal")
+                    .interpolate("step");
+
+// 添加路径
+svg.append("path")
+    .attr("d",areaPath(dataset))    
+    .attr("stroke","black")
+    .attr("stroke-width","3px")
+    .attr("fill","yellow"); 
+
+</script>    
+</body>
+</html>

@@ -1,0 +1,131 @@
+/*!
+ * qmen默认样式表
+ * Author: Luo_0412;
+ * Date: 2016-8-11;
+ */
+
+/*整体设置===*/
+html, body {
+    height: 100%;
+    font-family: 'Consolas','Helvetica';
+    background-color: #39394d;
+    height: 100%;
+}
+
+body {
+    padding-top: 60px;
+} /*为设置公共导航条设置顶部内补*/
+
+
+
+/*公共导航条设置===*/
+.navbar a {
+    /*color: #FFF;*/
+    font-weight: bold;
+}
+
+.nav > li:hover .dropdown-menu {display: block;}
+
+.navbar {
+    /*background-color: white;*/
+    font-size: 14px;
+}
+
+
+.navbar-header img {
+    margin-top: 12px;
+    width: 110px;
+    height: 25px;
+} /*已知图片大小的固定设置*/
+
+.navbar li > button {
+    margin-top: 10px;
+    margin-left: 10px;
+}
+
+
+.btn {
+  cursor: pointer;
+}
+
+.btn-sunken {
+  border: 1px solid #CCCCCC;
+  box-shadow: 2px 4px 6px #CCCCCC;
+  font-weight: 900;
+  color: gray;
+  letter-spacing: 1px;
+  -webkit-transition: all 150ms linear;
+          transition: all 150ms linear;
+}
+
+.btn-sunken:hover {
+  background-color: #f8f8f8;
+  box-shadow: 0px 0px 0px #CCCCCC;
+  font-weight: 800;
+  /*color:green;*/
+  -webkit-transition: all 250ms linear;
+          transition: all 250ms linear;
+}
+
+/*顶部加载条===*/
+.load-bar {
+  position: relative;
+  width: 100%;
+  height: 6px;
+  /*background-color: #fdba2c;*/
+}
+.bar {
+  content: "";
+  display: inline;
+  position: absolute;
+  width: 0;
+  height: 100%;
+  left: 50%;
+  text-align: center;
+}
+.bar:nth-child(1) {
+  background-color: #fdba2c;
+  animation: loading 1.5s linear 1;
+}
+/*.bar:nth-child(2) {
+  background-color: #3b78e7;
+  animation: loading 3s linear 1s 1;
+}
+.bar:nth-child(3) {
+  background-color: #da4733;
+  animation: loading 3s linear 2s 1;
+}*/
+@keyframes loading {
+  from {left: 50%; width: 0;z-index:100;}
+  33.3333% {left: 0; width: 100%;z-index: 10;}
+  to {left: 0; width: 100%;}
+}
+
+.right-thumbnail {
+  margin-top: 20px;
+}
+
+.right-carousel img {
+    width: 500px;
+    margin:0 auto;
+}
+
+
+/* panel下面的搜索框间的距离*/
+.panel-body form  {
+  margin-bottom:10px;
+}
+
+.panel-body form:last-child  {
+  margin-bottom: 0px;
+}
+
+.carousel-inner {
+  background-color: #f5f5f5;
+  border:1px solid;
+  border-radius:5px;
+}
+
+.thumbnail {
+  background-color: #f5f5f5;
+}
