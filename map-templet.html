@@ -1,0 +1,36 @@
+<!--
+  Function: jQuery Mobile基本模板
+  Adapter: Luo_0412
+  Date: 2016-9-19
+-->
+
+<!DOCTYPE html>
+<html>
+<head lang="zh-CN">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
+    <title>谷歌地图基本模板</title>
+    <link href="css/jquery.mobile-1.4.5.min.css" rel="stylesheet">
+    <script src="http://maps.googleapis.com/maps/api/js?key=AIzaSyDY0kkJiTPVd2U7aTOAwhc9ySH6oHxOIYM&sensor=false">
+    </script>
+
+    <script>
+    function initialize()
+    {
+    var mapProp = {
+      center:new google.maps.LatLng(51.508742,-0.120850),
+      zoom:5,
+      mapTypeId:google.maps.MapTypeId.ROADMAP
+      };
+    var map=new google.maps.Map(document.getElementById("googleMap")
+      ,mapProp);
+    }
+    google.maps.event.addDomListener(window, 'load', initialize);
+    </script>
+</head>
+<body>
+  <div id="googleMap" style="width:500px;height:380px;"></div> 
+  
+</body>
+</html>
