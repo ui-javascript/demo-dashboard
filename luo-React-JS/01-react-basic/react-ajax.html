@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>React ajax</title>
+    <!-- <link rel="stylesheet" href=""> -->
+</head>
+<body>
+
+<main>
+  <div id="example"></div>
+</main>
+<!-- <script src="../build/react.js"></script> -->
+<script src="http://static.runoob.com/assets/react/react-0.14.7/build/react.js"></script>
+<script src="http://static.runoob.com/assets/react/react-0.14.7/build/react-dom.js"></script>
+<script src="http://static.runoob.com/assets/react/browser.min.js"></script>
+<script src="http://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
+<script type="text/babel">
+
+var UserGist = React.createClass({
+    getInitialState: function() {
+      return {
+        username: '',
+        lastGistUrl: ''
+      };
+    },
+
+    componentDidMount: function() {
+      this.serverRequest = $.get(this.props.source, function (result) {
+        var lastGist = result[0];
+        this.setState({
+          username: lastGist.owner.login,
+          lastGistUrl: lastGist.html_url
+        });
+      }.bind(this));
+    },
+
+    componentWillUnmount: function() {
+      this.serverRequest.abort();
+    },
+
+    render: function() {
+      return (
+        <div>
+          {this.state.username} 用户最新的 Gist 共享地址：
+          <a href={this.state.lastGistUrl}>{this.state.lastGistUrl}</a>
+        </div>
+      );
+    }
+  });
+
+  ReactDOM.render(
+    <UserGist source="https://api.github.com/users/octocat/gists" />,
+    document.getElementById('example')
+  );
+
+</script>
+
+</body>
+</html>

@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>input onchange</title>
+    <!-- <link rel="stylesheet" href=""> -->
+</head>
+<body>
+
+<main>
+  <div id="example"></div>
+</main>
+<!-- <script src="../build/react.js"></script> -->
+<script src="http://static.runoob.com/assets/react/react-0.14.7/build/react.js"></script>
+<script src="http://static.runoob.com/assets/react/react-0.14.7/build/react-dom.js"></script>
+<script src="http://static.runoob.com/assets/react/browser.min.js"></script>
+<script type="text/babel">
+var Content = React.createClass({
+  render: function() {
+    return  <div>
+            <input type="text" value={this.props.myDataProp} onChange={this.props.updateStateProp} /> 
+            <h4>{this.props.myDataProp}</h4>
+            </div>;
+  }
+});
+
+var HelloMessage = React.createClass({
+  getInitialState: function() {
+    return {value: 'Hello Runoob!'};
+  },
+  handleChange: function(event) {
+    this.setState({value: event.target.value});
+  },
+  // render: function() {
+  //   var value = this.state.value;
+  //   return <div>
+  //           <input type="text" value={value} onChange={this.handleChange} /> 
+  //           <h4>{value}</h4>
+  //          </div>;
+  // }
+  
+  // 在子组件上使用表单 
+  // onChange 方法将触发 state 的更新
+  // 并将更新的值传递到子组件的输入框的 value 上来重新渲染界面。
+   render: function() {
+    var value = this.state.value;
+    return <div>
+            <Content myDataProp = {value} 
+              updateStateProp = {this.handleChange}></Content>
+           </div>;
+  }
+});
+
+ReactDOM.render(
+  <HelloMessage />,
+  document.getElementById('example')
+);
+</script>
+</body>
+</html>
