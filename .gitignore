@@ -1,3 +1,5 @@
-﻿#忽略d3-api-demo-master
-#/d3-api-demo-master/*
+﻿#忽略文件
+/tmp/*
+/src/res/*
+tmp-*
 
