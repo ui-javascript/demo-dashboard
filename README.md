@@ -20,13 +20,3 @@
 +  08-d3-map 地图
 +  08-d3-map-advanced 地图进阶
 
-### link列表
-+  [d3官网](https://d3js.org/)
-+  [d3中文手册](https://github.com/d3/d3/wiki/API--%E4%B8%AD%E6%96%87%E6%89%8B%E5%86%8C?from=groupmessage&isappinstalled=0)
-+  精通D3.js 交互式数据可视化 高级编程 作者：吕之华
-+  [图书学习站点](http://d3.decembercafe.org/)
-+  [快速入门](http://www.dashingd3js.com/table-of-contents)
-+  [资料1](http://www.ourd3js.com/wordpress/865/#more-865)
-+  [chart.js入门文档](http://www.bootcss.com/p/chart.js/docs/)
-+  [Highcharts入门文档](http://www.hcharts.cn/docs/start-introduction)
-+  [Echarts入门文档](http://echarts.baidu.com/echarts2/doc/start.html)
