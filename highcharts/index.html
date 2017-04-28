@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>ajax加载数据到highcharts</title>
+  </head>
+  <script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
+  <body>
+    <div id="chart1">
+      chart1
+    </div>
+    <script type="text/javascript">
+      $(function(){
+        $('#chart1').load('http://m.qmen.space:8080/api/city');
+
+        $.get("./data.json",function(data){
+          console.log(JSON.stringify(data));
+          for(var i=0; i<data.length; i++) {
+            console.log(data[i].cityName)
+          }
+        });
+      });
+    </script>
+  </body>
+</html>
