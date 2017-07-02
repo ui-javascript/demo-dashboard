@@ -1,66 +1,66 @@
 <!DOCTYPE html>
 <html>
+
 <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>svg-basic</title>
-    <!-- <link rel="stylesheet" href=""> -->
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>svg-basic</title>
+  <!-- <link rel="stylesheet" href=""> -->
 </head>
+
 <body>
-    
-<main>
 
-<!-- rect 直角矩形 ================================== -->
-<svg width="600" height="600" version="1.1" xmlns="http://www.w3.org/2000/svg">
-  <rect x="20" y="20" width="200" height="100" 
-      style=" fill:steelblue; stroke:blue; stroke-width:4; opacity:0.5" />
-  <rect x="250" y="20" rx="20" ry="30" width="200" height="100" 
-      style=" fill:yellow; stroke:black; stroke-width:4; opacity:0.5" />
-</svg>
+  <main>
 
-<!-- 
- xmlns 命名空间
- 这个直角矩形 rx < ry
- -->
+  <!-- rect 直角矩形 ================================== -->
+  <svg width="600" height="600" version="1.1" xmlns="http://www.w3.org/2000/svg">
+    <rect x="250" y="20" rx="20" ry="30" width="200" height="100" style=" fill:yellow; stroke:black; stroke-width:4; opacity:0.5" />
+    <rect x="20" y="20" width="200" height="100" style=" fill:steelblue; stroke:blue; stroke-width:4; opacity:0.5" />
+  </svg>
 
-<!-- circle 椭圆 ================================ -->
-<svg width="600" height="600" version="1.1" xmlns="http://www.w3.org/2000/svg">
-  <circle cx="150" cy="150" r="80" 
+    <!--
+     xmlns 命名空间
+     这个直角矩形 rx < ry
+     -->
+
+    <!-- circle 椭圆 ================================ -->
+    <svg width="600" height="600" version="1.1" xmlns="http://www.w3.org/2000/svg">
+  <circle cx="150" cy="150" r="80"
       style=" fill:yellow; stroke:black; stroke-width:4" />
   <ellipse cx="350" cy="150" rx="110" ry="80"
       style=" fill:#33FF33; stroke:blue; stroke-width:4" />
 </svg>
-<!-- 
+    <!--
   cx cy 圆心
   rx ry 椭圆的水平半径和垂直半径
  -->
 
-<!-- line ====================================== -->
-<svg width="600" height="600" version="1.1" xmlns="http://www.w3.org/2000/svg">
-  <line x1="20" y1="20" x2="300" y2="100" 
+    <!-- line ====================================== -->
+    <svg width="600" height="600" version="1.1" xmlns="http://www.w3.org/2000/svg">
+  <line x1="20" y1="20" x2="300" y2="100"
     style=" stroke:black; stroke-width:4" />
 </svg>
 
 
-<!-- polygon polyline 多边形和折线 ======================= -->
-<svg width="600" height="600" version="1.1" xmlns="http://www.w3.org/2000/svg">
+    <!-- polygon polyline 多边形和折线 ======================= -->
+    <svg width="600" height="600" version="1.1" xmlns="http://www.w3.org/2000/svg">
   <polygon points="100,20 20,90 60,160 140,160 180,90"
       style=" fill:LawnGreen; stroke:black; stroke-width:3 "/>
   <polyline points="100,20 20,90 60,160 140,160 180,90"
-      style=" fill:white; stroke:black; stroke-width:3 " 
+      style=" fill:white; stroke:black; stroke-width:3 "
       transform="translate(200,0)"/>
 </svg>
-<!--
-points 首尾相接 开头的是y 
+    <!--
+points 首尾相接 开头的是y
  -->
 
-<!-- path ======================================= -->
-<svg width="600" height="600" version="1.1" xmlns="http://www.w3.org/2000/svg">
+    <!-- path ======================================= -->
+    <svg width="600" height="600" version="1.1" xmlns="http://www.w3.org/2000/svg">
   <path d="M30,100 L270,300
            M30,100 H270
            M30,100 V300"
       style="stroke:black; stroke-width:3 "/>
-      
+
   <circle cx="30" cy="100" r="5" fill="green"/>
   <circle cx="270" cy="300" r="5" fill="green" />
   <circle cx="270" cy="100" r="5" fill="green"/>
@@ -68,24 +68,24 @@ points 首尾相接 开头的是y
 </svg>
 
 
-<!-- bezier2 ==================================== -->
-<svg width="600" height="600" version="1.1" xmlns="http://www.w3.org/2000/svg">
+    <!-- bezier2 ==================================== -->
+    <svg width="600" height="600" version="1.1" xmlns="http://www.w3.org/2000/svg">
   <path d="M30,100 Q190,20 270,100
            T450,100"
       style="fill:white; stroke:black; stroke-width:3 "/>
-      
+
   <path d="M30,100 L190,20 L270,100 "
       style="fill:none; stroke:black; stroke-width:1; stroke-dasharray:5,5 "/>
   <circle cx="30" cy="100" r="5" fill="green"/>
   <circle cx="190" cy="20" r="5" fill="green"/>
-  <circle cx="270" cy="100" r="5" fill="green" /> 
+  <circle cx="270" cy="100" r="5" fill="green" />
 
   <path d="M270,100 L350,180 L450,100 "
       style="fill:none; stroke:black; stroke-width:1; stroke-dasharray:5,5 "/>
   <circle cx="350" cy="180" r="5" style="fill:white; stroke:green; stroke-width:3; stroke-dasharray:2,2 "/>
   <circle cx="450" cy="100" r="5" fill="green" />
 </svg>
-<!--
+    <!--
  M moveto L lineto
  H horizontal lineTo 画水平直线到指定坐标
  V vertical lineto
@@ -100,18 +100,18 @@ points 首尾相接 开头的是y
 
  -->
 
-<!-- bezier3 ===================================== -->
-<svg width="600" height="600" version="1.1" xmlns="http://www.w3.org/2000/svg">
+    <!-- bezier3 ===================================== -->
+    <svg width="600" height="600" version="1.1" xmlns="http://www.w3.org/2000/svg">
   <path d="M30,100 C100,20 190,20 270,100
            S400,180 450,100"
       style="fill:white; stroke:black; stroke-width:3 "/>
-      
+
   <path d="M30,100 L100,20 L190,20 L270,100 "
       style="fill:none; stroke:black; stroke-width:1; stroke-dasharray:5,5 "/>
   <circle cx="30" cy="100" r="5" fill="green"/>
   <circle cx="100" cy="20" r="5" fill="green"/>
   <circle cx="190" cy="20" r="5" fill="green"/>
-  <circle cx="270" cy="100" r="5" fill="green" /> 
+  <circle cx="270" cy="100" r="5" fill="green" />
 
   <path d="M270,100 L350,180 L400,180 L450,100 "
       style="fill:none; stroke:black; stroke-width:1; stroke-dasharray:5,5 "/>
@@ -120,16 +120,16 @@ points 首尾相接 开头的是y
   <circle cx="450" cy="100" r="5" fill="green" />
 </svg>
 
-<!-- arc ========================================= -->
-<svg width="600" height="600" version="1.1" xmlns="http://www.w3.org/2000/svg">
+    <!-- arc ========================================= -->
+    <svg width="600" height="600" version="1.1" xmlns="http://www.w3.org/2000/svg">
   <path d="M100,200 a200,150 0 1,0 150,-150 Z"
           fill="yellow" stroke="blue" stroke-width="4" />
 
-  <circle cx="100" cy="200" r="5" fill="green" /> 
-  <circle cx="250" cy="50" r="5" fill="green" />  
+  <circle cx="100" cy="200" r="5" fill="green" />
+  <circle cx="250" cy="50" r="5" fill="green" />
 </svg>
 
-<!-- 
+    <!--
 A(以下参数)
 rx ry 椭圆xy方向的 半轴 大小
 x-axis-rotation 椭圆x轴与水平轴顺时针方向的夹角
@@ -138,31 +138,30 @@ sweep-flag 1:顺时针至终点 0：逆时针
 x y 终点坐标
  -->
 
-<!-- text ======================================= -->
-<svg width="600" height="600" version="1.1" xmlns="http://www.w3.org/2000/svg">
+    <!-- text ======================================= -->
+    <svg width="600" height="600" version="1.1" xmlns="http://www.w3.org/2000/svg">
   <text x="200" y="150" dx="-5" dy="5" font-size="40" >
   I love <tspan fill="red">D3</tspan>
   </text>
 </svg>
-<!--
+    <!--
 x y  文字位置
 dx dy  相对于现在位置平移的距离
-textLength 
+textLength
 <tspan> 单独定义样式
  -->
 
-<!-- marker ===================================== -->
-<svg width="100%" height="100%" version="1.1"
-xmlns="http://www.w3.org/2000/svg">
+    <!-- marker ===================================== -->
+    <svg width="100%" height="100%" version="1.1" xmlns="http://www.w3.org/2000/svg">
 
 <defs>
-<marker id="arrow" 
-        markerUnits="strokeWidth" 
-        markerWidth="12" 
-        markerHeight="12" 
-        viewBox="0 0 12 12" 
-        refX="6" 
-        refY="6" 
+<marker id="arrow"
+        markerUnits="strokeWidth"
+        markerWidth="12"
+        markerHeight="12"
+        viewBox="0 0 12 12"
+        refX="6"
+        refY="6"
         orient="auto">
         <path d="M2,2 L10,6 L2,10 L6,6 L2,2" style="fill: #000000;" />
 </marker>
@@ -174,7 +173,7 @@ xmlns="http://www.w3.org/2000/svg">
 
 </svg>
 
-<!-- 
+    <!--
 defs 可重用
 viewBox 坐标系的区域
 refX refY 直线端点
@@ -183,8 +182,8 @@ markerWidth markerHeight 标识的大小
 orient 绘制方向 : auto或角度值
  -->
 
-<!-- blur 滤镜 ================================== -->
-<svg width="600" height="600" version="1.1" xmlns="http://www.w3.org/2000/svg">
+    <!-- blur 滤镜 ================================== -->
+    <svg width="600" height="600" version="1.1" xmlns="http://www.w3.org/2000/svg">
   <defs>
   <filter id="GaussianBlur">
     <feGaussianBlur in="SourceGraphic" stdDeviation="2" />
@@ -196,13 +195,13 @@ orient 绘制方向 : auto或角度值
   <rect x="300" y="100" width="150" height="100"
         fill="blue" filter="url(#GaussianBlur)" />
 </svg>
-<!-- 
+    <!--
 feMorphology feGaussianBlur feFlood
 定义光源的滤镜 feDistantLight fePointLight feSpotLight
  -->
 
-<!-- gradient 渐变 ============================== -->
-<svg width="600" height="600" version="1.1" xmlns="http://www.w3.org/2000/svg">
+    <!-- gradient 渐变 ============================== -->
+    <svg width="600" height="600" version="1.1" xmlns="http://www.w3.org/2000/svg">
   <defs>
   <linearGradient id="myGradient" x1="0%" y1="0%" x2="0%" y2="100%">
       <stop offset="0%" stop-color="#F00" />
@@ -212,12 +211,13 @@ feMorphology feGaussianBlur feFlood
   <rect fill="url(#myGradient)"
         x="10" y="10" width="300" height="100"/>
 </svg>
-<!-- 
+    <!--
 linearGradient
 radialGradient
  -->
 
-</main>
+  </main>
 
 </body>
+
 </html>
