@@ -1,0 +1,129 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <title>柱状图(json)</title>
+    <script type="text/javascript" src="js/jquery.min.js"></script>
+    <style type="text/css">
+        #container, #sliders {
+            min-width: 310px; 
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        #container {
+            height: 400px; 
+        }
+	</style>
+	<script type="text/javascript">
+        $(function () {
+
+            /*柱状图设置=====================*/
+            var chart = new Highcharts.Chart({
+                chart: {
+                    renderTo: 'container',
+                    type: 'column',
+                    options3d: {
+                        enabled: true,
+                        alpha: 15,
+                        beta: 15,
+                        depth: 50,
+                        viewDistance: 25
+                    }
+                },
+                title: {
+                    text: '各月的总乘坐人数统计报表'
+                },
+                subtitle: {
+                    text: '404厂车系统'
+                },
+                plotOptions: {
+                    column: {
+                        depth: 25
+                    }
+                },
+                xAxis: {
+                    categories: ['1月', '2月', '3月', '4月', '5月', '6月',
+                        '7月', '8月', '9月', '10月', '11月', '12月']
+                },
+                yAxis: {
+                    title: {
+                        text: '人数(人)'
+                    }
+                },
+                tooltip: {
+                    valueSuffix: '人'
+                },
+                series: [
+                {
+                    name: '理论乘坐人数',
+                    data: [78, 89, 95, 85, 82, 85, 85, 86, 83, 83, 89, 96]
+                }
+                ,{
+                    name: '实际乘坐人数',
+                    data: [82, 88, 87, 93, 80, 80, 88, 81, 81, 81, 86, 95]
+                } 
+                ]
+            });
+
+            /*操作杆Js===============================*/
+            // function showValues() {
+            //     $('#alpha-value').html(chart.options.chart.options3d.alpha);
+            //     $('#beta-value').html(chart.options.chart.options3d.beta);
+            //     $('#depth-value').html(chart.options.chart.options3d.depth);
+            // }
+
+            // // Activate the sliders
+            // $('#sliders input').on('input change', function () {
+            //     chart.options.chart.options3d[this.id] = this.value;
+            //     showValues();
+            //     chart.redraw(false);
+            // });
+
+            // showValues();
+
+
+            // alert(chart.title.textStr);  //获取标题
+
+            /*获取json文件数据=====================*/
+            var url =  "userinfo.json";   //json文件的路径
+            $.getJSON(url,function(data) { 
+                var i,len=data.length; 
+                for(i=0;i<len;i++) {
+                    chart.series[i].update({
+                    name: data[i].name,
+                    data: data[i].data}); 
+                }
+            });
+
+        });
+		</script>
+</head>
+<body>
+
+    <script src="js/highcharts.js"></script>
+    <script src="js/highcharts-3d.js"></script>
+    <script src="js/modules/exporting.js"></script>
+
+    <div id="container"></div>
+
+    <!-- 操作杆========= -->
+<!-- 
+    <div id="sliders">
+        <table>
+            <tr>
+            	<td>Alpha Angle</td>
+            	<td><input id="alpha" type="range" min="0" max="45" value="15"/> <span id="alpha-value" class="value"></span></td>
+            </tr>
+            <tr>
+            	<td>Beta Angle</td>
+            	<td><input id="beta" type="range" min="-45" max="45" value="15"/> <span id="beta-value" class="value"></span></td>
+            </tr>
+            <tr>
+            	<td>Depth</td>
+            	<td><input id="depth" type="range" min="20" max="100" value="50"/> <span id="depth-value" class="value"></span></td>
+            </tr>
+        </table>
+    </div> -->
+    
+</body>
+</html>

@@ -1,0 +1,83 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<title>折线图(json)</title>
+	<script type="text/javascript" src="js/jquery.min.js"></script>
+	<style type="text/css">
+        ${demo.css}
+	</style>
+	<script type="text/javascript">
+
+        /*折线图设置=====================*/
+        $(function () {
+            $('#container').highcharts({
+                title: {
+                    text: '各月的平均乘坐率统计报表',
+                    x: -20 //center
+                },
+                subtitle: {
+                    text: '404厂车系统',
+                    x: -20
+                },
+                xAxis: {
+                    categories: ['1月', '2月', '3月', '4月', '5月', '6月',
+                        '7月', '8月', '9月', '10月', '11月', '12月']
+                },
+                yAxis: {
+                    title: {
+                        text: '乘坐率百分率(%)'
+                    },
+                    plotLines: [{
+                        value: 0,
+                        width: 100,
+                        color: '#808080'
+                    }]
+                },
+                tooltip: {
+                    valueSuffix: '%'
+                },
+                legend: {
+                    layout: 'vertical',
+                    align: 'right',
+                    verticalAlign: 'middle',
+                    borderWidth: 0
+                },
+                series: [
+                {
+                    name: '理论乘坐率',
+                    data: [78, 89, 95, 85, 82, 85, 85, 86, 83, 83, 89, 96]
+                }
+                ,{
+                    name: '实际乘坐率',
+                    data: [82, 88, 87, 93, 80, 80, 88, 81, 81, 81, 86, 95]
+                } 
+                ]
+            }
+
+            
+
+            );
+
+            /*获取json文件数据=====================*/
+            var url =  "userinfo2.json";   //json文件的路径
+            var chart = $('#container').highcharts();
+
+            $.getJSON(url,function(data) { 
+                var i,len=data.length; 
+                for(i=0;i<len;i++) {
+                    chart.series[i].update({
+                    name: data[i].name,
+                    data: data[i].data}); 
+                }
+            });
+
+        });
+    </script>
+</head>
+<body>
+    <script src="js/highcharts.js"></script>
+    <script src="js/modules/exporting.js"></script>
+    <div id="container" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
+</body>
+</html>
