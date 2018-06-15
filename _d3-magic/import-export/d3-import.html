@@ -9,44 +9,44 @@
 <body>
 
 <main>
-    
+
 </main>
 <script src="../js/libs/d3.min.js"></script>
-<script>  
-            
-d3.json("city.json",function(error,data){
-    if (error) 
-        return console.error(error); //考虑到可能没有值
-    console.log(data); // 放在函数了执行语句 因为是异步读取的
-});
+<script>
 
-d3.xml("example.xml",function(error,xmlDocument){
-    if (error) 
-        return console.error(error);
-        
-    console.log( xmlDocument.getElementsByTagName("title")[0].innerHTML );
-    console.log( xmlDocument.getElementsByTagName("date")[0].innerHTML );
-    console.log( xmlDocument.getElementsByTagName("body")[0].innerHTML );
-    
-});
+    d3.json("city.json", function (error, data) {
+        if (error)
+            return console.error(error); //考虑到可能没有值
+        console.log(data); // 放在函数了执行语句 因为是异步读取的
+    });
 
-d3.text("note.txt",function(error,txtdata){
-    if (error) 
-        return console.error(error);
-        
-    d3.select("body")
-        .append("p")
-        .text(txtdata);
-});
+    d3.xml("example.xml", function (error, xmlDocument) {
+        if (error)
+            return console.error(error);
 
-d3.csv("table.csv", function(error, csvdata) {
-    if(error) {
-        console.log(error);
-    }
-    console.log(csvdata);
-});
+        console.log(xmlDocument.getElementsByTagName("title")[0].innerHTML);
+        console.log(xmlDocument.getElementsByTagName("date")[0].innerHTML);
+        console.log(xmlDocument.getElementsByTagName("body")[0].innerHTML);
 
-</script>     
+    });
+
+    d3.text("note.txt", function (error, txtdata) {
+        if (error)
+            return console.error(error);
+
+        d3.select("body")
+            .append("p")
+            .text(txtdata);
+    });
+
+    d3.csv("table.csv", function (error, csvdata) {
+        if (error) {
+            console.log(error);
+        }
+        console.log(csvdata);
+    });
+
+</script>
 </body>
 </html>
 

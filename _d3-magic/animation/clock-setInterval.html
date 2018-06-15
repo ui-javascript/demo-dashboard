@@ -2,63 +2,64 @@
 <html>
 
 <head>
-	<meta charset="utf-8">
-	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>时钟</title>
-	<style>
-		/* 时钟样式 字体*/
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>时钟</title>
+    <style>
+        /* 时钟样式 字体*/
 
-		.time {
-			font-family: Cursive;
-			font-size: 40px;
-			stroke: black;
-			stroke-width: 2;
-		}
-	</style>
+        .time {
+            font-family: Cursive;
+            font-size: 40px;
+            stroke: black;
+            stroke-width: 2;
+        }
+    </style>
 </head>
 
 <body>
-	<main>
-	</main>
+<main>
+</main>
 
-	<script src="https://cdn.bootcss.com/d3/3.5.17/d3.min.js"></script>
-	<script>
-		// 创建svg,及其长宽
-		var width = 500,
-			height = 500;
-		var svg = d3.select("main").append("svg")
-			.attr("width", width)
-			.attr("height", height);
+<script src="https://cdn.bootcss.com/d3/3.5.17/d3.min.js"></script>
+<script>
+    // 创建svg,及其长宽
+    var width = 500,
+        height = 500;
+    var svg = d3.select("main").append("svg")
+        .attr("width", width)
+        .attr("height", height);
 
-		// 文字
-		var timeText = svg.append("text")
-			.attr("x", 100).attr("y", 100)
-			.attr("class", "time")
-			.text(getTimeString());
+    // 文字
+    var timeText = svg.append("text")
+        .attr("x", 100).attr("y", 100)
+        .attr("class", "time")
+        .text(getTimeString());
 
-		// 每毫秒更新一下
-		function updateTime() {
-			timeText.text(getTimeString());
-		}
-		setInterval(updateTime, 1000);
+    // 每毫秒更新一下
+    function updateTime() {
+        timeText.text(getTimeString());
+    }
 
-		/**
-		 * [getTimeString 获取当前时间]
-		 * @return {[type]} [description]
-		 */
-		function getTimeString() {
-			var time = new Date(),
-				hours = time.getHours(),
-				minutes = time.getMinutes(),
-				seconds = time.getSeconds();
+    setInterval(updateTime, 1000);
 
-			// 处理小于10的数字
-			hours = hours < 10 ? "0" + hours : hours;
-			minutes = minutes < 10 ? "0" + minutes : minutes;
-			seconds = seconds < 10 ? "0" + seconds : seconds;
-			return hours + ":" + minutes + ":" + seconds;
-		}
-	</script>
+    /**
+     * [getTimeString 获取当前时间]
+     * @return {[type]} [description]
+     */
+    function getTimeString() {
+        var time = new Date(),
+            hours = time.getHours(),
+            minutes = time.getMinutes(),
+            seconds = time.getSeconds();
+
+        // 处理小于10的数字
+        hours = hours < 10 ? "0" + hours : hours;
+        minutes = minutes < 10 ? "0" + minutes : minutes;
+        seconds = seconds < 10 ? "0" + seconds : seconds;
+        return hours + ":" + minutes + ":" + seconds;
+    }
+</script>
 </body>
 
 </html>

@@ -16,11 +16,11 @@ mounted(server, DB);
 server.use(router);
 
 server.listen(
-   {
-      host: ip,
-      port: 3122
-   },
-   function() {
-      console.log(`JSON Server is running in http://${ip}:3122`);
-   }
+    {
+        host: ip,
+        port: 3122
+    },
+    function () {
+        console.log(`JSON Server is running in http://${ip}:3122`);
+    }
 );

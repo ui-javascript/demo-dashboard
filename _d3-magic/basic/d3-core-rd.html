@@ -14,12 +14,14 @@
     <!-- Bootstrap的css样式 -->
     <link href="../css/libs/bootstrap.min.css" rel="stylesheet">
     <style type="text/css">
-        svg text{
+        svg text {
             fill: tomato;
         }
-        svg circle{
+
+        svg circle {
             opacity: 0.8;
         }
+
         #call-nd-svg-demo circle {
             fill: orange;
         }
@@ -29,11 +31,13 @@
 
 <div class="container">
     <div id="sort-svg-demo">
-        <button width=20 height=15>排序</button><br>
+        <button width=20 height=15>排序</button>
+        <br>
         <svg></svg>
     </div>
     <div id="on-svg-demo">
-        <button width=20 height=15>y=3*x</button><br>
+        <button width=20 height=15>y=3*x</button>
+        <br>
         <svg></svg>
     </div>
     <div id="event-div-demo"></div>
@@ -51,170 +55,182 @@
 </div> <!-- /. container -->
 
 
-    <!-- jQuery v2.1.4 -->
-    <script src="../js/libs/jquery.min.js"></script>
-    <!-- Bootstrap的js文件 -->
-    <!-- <script src="js/libs/bootstrap.min.js"></script> -->
-    <!-- d3的js文件 -->
-    <script type="text/javascript" src="../js/libs/d3.v3.js"></script>
-    <script type="text/javascript">
-        //一维数组数据
-        var data = [
-            {name: "A2", value: 2},
-            {name: "A1", value: 1},
-            {name: "A5", value: 5},
-            {name: "A4", value: 4},
-        ];
+<!-- jQuery v2.1.4 -->
+<script src="../js/libs/jquery.min.js"></script>
+<!-- Bootstrap的js文件 -->
+<!-- <script src="js/libs/bootstrap.min.js"></script> -->
+<!-- d3的js文件 -->
+<script type="text/javascript" src="../js/libs/d3.v3.js"></script>
+<script type="text/javascript">
+    //一维数组数据
+    var data = [
+        {name: "A2", value: 2},
+        {name: "A1", value: 1},
+        {name: "A5", value: 5},
+        {name: "A4", value: 4},
+    ];
 
-        //新增元素
+    //新增元素
+    d3.select('#sort-svg-demo svg').selectAll('text')
+        .data(data) //绑定数据
+        .enter()        //返回新元素的占位符
+        .append('text') //新增新元素
+        .attr({
+            x: '13',
+            y: function (d, i) {
+                return 20 + 20 * i;
+            }
+        }).text(function (d, i) {
+        return d.name;
+    });
+
+    //按照绑定数据的value属性进行排序
+    var sort = function () {
         d3.select('#sort-svg-demo svg').selectAll('text')
-            .data(data) //绑定数据
-            .enter()        //返回新元素的占位符
-            .append('text') //新增新元素
-            .attr({
-                x: '13',
-                y: function (d, i) {
-                    return 20 + 20 * i;
-                }
-            }).text(function (d, i) { return d.name; });
-
-        //按照绑定数据的value属性进行排序
-        var sort=function(){
-            d3.select('#sort-svg-demo svg').selectAll('text')
             .sort(function (a, b) {
                 return a.value - b.value;
             }).attr({
-                x: '13',
-                y: function (d, i) {
-                    return 20 + 20 * i;
-                }
-            })
-            .text(function (d, i) { return d.name; });
-        };
-        //单击按钮进行排序
-        d3.select("#sort-svg-demo button").on("click",sort)
+            x: '13',
+            y: function (d, i) {
+                return 20 + 20 * i;
+            }
+        })
+            .text(function (d, i) {
+                return d.name;
+            });
+    };
+    //单击按钮进行排序
+    d3.select("#sort-svg-demo button").on("click", sort)
 
-        //一维数组数据
-        var data2 = [1,2,3,4,5];
+    //一维数组数据
+    var data2 = [1, 2, 3, 4, 5];
 
-        //新增元素
+    //新增元素
+    d3.select('#on-svg-demo svg').selectAll('text')
+        .data(data2) //绑定数据
+        .enter()        //返回新元素的占位符
+        .append('text') //新增新元素
+        .attr({
+            y: function (d, i) {
+                return 20 + 20 * d;
+            }
+        }).text(function (d, i) {
+        return "old：" + d;
+    });
+
+    //单击按钮更改文本内容
+    d3.select("#on-svg-demo button").on("click", function () {
         d3.select('#on-svg-demo svg').selectAll('text')
-            .data(data2) //绑定数据
-            .enter()        //返回新元素的占位符
-            .append('text') //新增新元素
-            .attr({
-                y: function (d, i) {
-                    return 20 + 20 * d;
-                }
-            }).text(function (d, i) { return "old："+d; });
-
-        //单击按钮更改文本内容
-        d3.select("#on-svg-demo button").on("click",function(){
-            d3.select('#on-svg-demo svg').selectAll('text')
-                .text(function (d, i) { return "new："+d*3; });
-        });
-
-
-        //获取鼠标位置
-        var svg = d3.select('#event-div-demo').append('svg')
-            .attr({
-                width:960,
-                height:300
+            .text(function (d, i) {
+                return "new：" + d * 3;
             });
-        var text1=svg.append('text')
-            .attr({
-                x: 0,
-                y: 50
-            })
-        var text2=svg.append('text')
-            .attr({
-                x: 0,
-                y: 70
-            })
-        //比较d3.mouse和d3.event的偏移坐标
-        svg.on("mousemove", function (d, i) {
-            console.log(d3.event);
-            var pos1 = "d3.mouse pos："+d3.mouse(d3.select("body")[0][0]);
-            var pos2 = "d3.event pos："+d3.event.offsetX+","+d3.event.offsetY;
-            text1.text(pos1);
-            text2.text(pos2);
+    });
+
+
+    //获取鼠标位置
+    var svg = d3.select('#event-div-demo').append('svg')
+        .attr({
+            width: 960,
+            height: 300
         });
+    var text1 = svg.append('text')
+        .attr({
+            x: 0,
+            y: 50
+        })
+    var text2 = svg.append('text')
+        .attr({
+            x: 0,
+            y: 70
+        })
+    //比较d3.mouse和d3.event的偏移坐标
+    svg.on("mousemove", function (d, i) {
+        console.log(d3.event);
+        var pos1 = "d3.mouse pos：" + d3.mouse(d3.select("body")[0][0]);
+        var pos2 = "d3.event pos：" + d3.event.offsetX + "," + d3.event.offsetY;
+        text1.text(pos1);
+        text2.text(pos2);
+    });
 
 
-        //添加圆使用的数据集
-        var dataset=[1,2,3,4,5,6,7,8,9,10];
+    //添加圆使用的数据集
+    var dataset = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
 
-        //颜色比例尺
-        var color=d3.scale.category20();
+    //颜色比例尺
+    var color = d3.scale.category20();
 
-        //使用数据集添加10个圆
-        d3.select('#each-svg-demo svg').selectAll("circle")
-            .data(dataset)
-            .enter()
-            .append('circle');
+    //使用数据集添加10个圆
+    d3.select('#each-svg-demo svg').selectAll("circle")
+        .data(dataset)
+        .enter()
+        .append('circle');
 
-        //使用each函数为每个圆设置属性
-        d3.selectAll("circle")
-        .each(function(d){
+    //使用each函数为每个圆设置属性
+    d3.selectAll("circle")
+        .each(function (d) {
             d3.select(this).attr({
-                cx: function(d){ return 20*d;},
+                cx: function (d) {
+                    return 20 * d;
+                },
                 cy: 100,
-                r: function(d){ return 3*d;},
-                fill:color(d)
+                r: function (d) {
+                    return 3 * d;
+                },
+                fill: color(d)
             });
         });
 
-        var circle=d3.select('#call-svg-demo svg').append('circle')
-            .attr({
-                cx: 100,
-                cy: 100,
-                r: 40
-            });
+    var circle = d3.select('#call-svg-demo svg').append('circle')
+        .attr({
+            cx: 100,
+            cy: 100,
+            r: 40
+        });
 
-        var rect=d3.select('#call-svg-demo svg').append('svg:rect')
-            .attr({
-                x: 10,
-                y: 50,
-                width: 40,
-                height: 100
-            });
+    var rect = d3.select('#call-svg-demo svg').append('svg:rect')
+        .attr({
+            x: 10,
+            y: 50,
+            width: 40,
+            height: 100
+        });
 
-        //定义色彩填充方法
-        function fill(ele, fill) {
-            this.style("fill", fill);
-        }
+    //定义色彩填充方法
+    function fill(ele, fill) {
+        this.style("fill", fill);
+    }
 
-        //使用call函数调用fill函数填充颜色
-        rect.call(fill, "orange");
-        circle.call(fill, "tomato");
+    //使用call函数调用fill函数填充颜色
+    rect.call(fill, "orange");
+    circle.call(fill, "tomato");
 
-        //以下代码的讲解，请参见d3.selections.html
-        var svg_nd = d3.select('#call-nd-svg-demo')
-            .append('svg')  //向body标签增加svg子元素
-            .attr({
-                "width": 500,
-                "height": 500,
-            });
+    //以下代码的讲解，请参见d3.selections.html
+    var svg_nd = d3.select('#call-nd-svg-demo')
+        .append('svg')  //向body标签增加svg子元素
+        .attr({
+            "width": 500,
+            "height": 500,
+        });
 
-        svg_nd.append('circle')
-            .attr({
-                cx: 100, cy: 100, r: 40
-            });
+    svg_nd.append('circle')
+        .attr({
+            cx: 100, cy: 100, r: 40
+        });
 
-        //开启动画，并设置动画结束时填充色为blue
-        svg_nd.select('circle').call(start, 2000, "blue");
-        //设置定时器，1秒后启动
-        setTimeout(function () {
-            //立刻结束当前元素正在执行的动画，并开启新动画
-            svg_nd.select('circle').call(start, 1000, "red");
-        }, 1000);
+    //开启动画，并设置动画结束时填充色为blue
+    svg_nd.select('circle').call(start, 2000, "blue");
+    //设置定时器，1秒后启动
+    setTimeout(function () {
+        //立刻结束当前元素正在执行的动画，并开启新动画
+        svg_nd.select('circle').call(start, 1000, "red");
+    }, 1000);
 
-        //定义动画逻辑方法
-        function start(ele, time, fill) {
-            this.transition().duration(time)
-                .style("fill", fill);
-        }
+    //定义动画逻辑方法
+    function start(ele, time, fill) {
+        this.transition().duration(time)
+            .style("fill", fill);
+    }
 
-    </script>
+</script>
 </body>
 </html>

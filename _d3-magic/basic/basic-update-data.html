@@ -21,151 +21,151 @@
 
 <!-- 控制的按钮 -->
 <aside>
-  <button type="button" id="sort_btn">   排序  </button>
-  <button type="button" id="add_btn">   增加数据  </button>
-  <button type="button" id="delete_btn">   删除数据  </button>
-  <br />   
+    <button type="button" id="sort_btn"> 排序</button>
+    <button type="button" id="add_btn"> 增加数据</button>
+    <button type="button" id="delete_btn"> 删除数据</button>
+    <br/>
 </aside>
 
 <script src="http://cdn.bootcss.com/d3/3.5.17/d3.js"></script>
 <!-- <script src="../js/libs/d3.v3.min.js"></script> -->
 <script>
-// 设定参数 ============================
-// 全局变量
-var dataset = [50, 43, 120, 87, 99, 167, 142];
-var width  = 500;   
-var height = 200;   
-var padding = { top: 20 , right: 20, bottom: 20, left: 20 }; // 外边框
-var rectStep = 35;  
-var rectWidth = 30;  // 35 - 30 = 5 矩形间的间距
+    // 设定参数 ============================
+    // 全局变量
+    var dataset = [50, 43, 120, 87, 99, 167, 142];
+    var width = 500;
+    var height = 200;
+    var padding = {top: 20, right: 20, bottom: 20, left: 20}; // 外边框
+    var rectStep = 35;
+    var rectWidth = 30;  // 35 - 30 = 5 矩形间的间距
 
 
-// 创建svg =============================   
-var svg = d3.select("main")         
-            .append("svg")         
-            .attr("width", width)   
-            .attr("height", height);
+    // 创建svg =============================
+    var svg = d3.select("main")
+        .append("svg")
+        .attr("width", width)
+        .attr("height", height);
 
-// 注册按钮监听事件 ====================
-var sort_btn = document.getElementById("sort_btn");
-var add_btn = document.getElementById("add_btn");
-var delete_btn = document.getElementById("delete_btn");
+    // 注册按钮监听事件 ====================
+    var sort_btn = document.getElementById("sort_btn");
+    var add_btn = document.getElementById("add_btn");
+    var delete_btn = document.getElementById("delete_btn");
 
-sort_btn.addEventListener("click", function() {
-    mysort();
-});
-add_btn.addEventListener("click", function() {
-    myadd();
-});
-delete_btn.addEventListener("click", function() {
-    mydelete();
-});
+    sort_btn.addEventListener("click", function () {
+        mysort();
+    });
+    add_btn.addEventListener("click", function () {
+        myadd();
+    });
+    delete_btn.addEventListener("click", function () {
+        mydelete();
+    });
 
-// 开始绘制 ============================
-draw();
+    // 开始绘制 ============================
+    draw();
 
-// 绘制函数 ============================
-// 新增数据，画柱状图及其文字
-function draw(){
+    // 绘制函数 ============================
+    // 新增数据，画柱状图及其文字
+    function draw() {
 
-    // 处理模板 =====================
-    var updateRect = svg.selectAll("rect")
-                    .data(dataset);
-    var enterRect = updateRect.enter();
-    var exitRect = updateRect.exit(); // 这两步在update之前
-    
-    // 矩形的update ==============
-    updateRect.attr("fill","steelblue")     
-            .attr("x", function(d,i){      
+        // 处理模板 =====================
+        var updateRect = svg.selectAll("rect")
+            .data(dataset);
+        var enterRect = updateRect.enter();
+        var exitRect = updateRect.exit(); // 这两步在update之前
+
+        // 矩形的update ==============
+        updateRect.attr("fill", "steelblue")
+            .attr("x", function (d, i) {
                 return padding.left + i * rectStep;
             })
-            .attr("y", function(d){    
-                return height- padding.bottom - d;
+            .attr("y", function (d) {
+                return height - padding.bottom - d;
             })
-            .attr("width",rectWidth)        
-            .attr("height",function(d){
+            .attr("width", rectWidth)
+            .attr("height", function (d) {
                 return d;
             });
-    
-    // 矩形的enter ================
-    enterRect.append("rect")
-            .attr("fill","steelblue")      
-            .attr("x", function(d,i){       
+
+        // 矩形的enter ================
+        enterRect.append("rect")
+            .attr("fill", "steelblue")
+            .attr("x", function (d, i) {
                 return padding.left + i * rectStep;
             })
-            .attr("y", function(d){     
-                return height- padding.bottom - d;
+            .attr("y", function (d) {
+                return height - padding.bottom - d;
             })
-            .attr("width",rectWidth)        
-            .attr("height",function(d){ 
+            .attr("width", rectWidth)
+            .attr("height", function (d) {
                 return d;
             });
-    
-    // 矩形的exit =================
-    exitRect.remove();
-            
-    
-    //获取文字 ====================
-    var updateText = svg.selectAll("text")
-                    .data(dataset);
-    var enterText = updateText.enter();
-    var exitText = updateText.exit();
-    
-    // 文字的update =============
-    updateText.attr("fill","white")
-                .attr("font-size","14px")
-                .attr("text-anchor","middle")
-                .attr("x", function(d,i){
-                    return padding.left + i * rectStep;
-                })
-                .attr("y", function(d){
-                    return height- padding.bottom - d;
-                })
-                .attr("dx",rectWidth/2)
-                .attr("dy","1em")
-                .text(function(d){
-                    return d;
-                });
-    
-    // 文字的enter ===============
-    enterText.append("text")
-                .attr("fill","white")
-                .attr("font-size","14px")
-                .attr("text-anchor","middle")
-                .attr("x", function(d,i){
-                    return padding.left + i * rectStep;
-                })
-                .attr("y", function(d){
-                    return height- padding.bottom - d;
-                })
-                .attr("dx",rectWidth/2)
-                .attr("dy","1em")
-                .text(function(d){
-                    return d;
-                });
 
-    // 文字的exit =================
-    exitText.remove();
-}
+        // 矩形的exit =================
+        exitRect.remove();
 
-// 排序函数 ===================
-function mysort(){
-    dataset.sort(d3.ascending);
-    draw(); // 重新绘制
-}
 
-// 新增数据 ===================
-function myadd(){
-    dataset.push( 10 + Math.floor(Math.random() * 100) ); // 新增随机数
-    draw();
-}   
+        //获取文字 ====================
+        var updateText = svg.selectAll("text")
+            .data(dataset);
+        var enterText = updateText.enter();
+        var exitText = updateText.exit();
 
-// 删除数据 ===================
-function mydelete() {
-    dataset.splice(0, 1); // 删除第一个数据
-    draw();
-}
+        // 文字的update =============
+        updateText.attr("fill", "white")
+            .attr("font-size", "14px")
+            .attr("text-anchor", "middle")
+            .attr("x", function (d, i) {
+                return padding.left + i * rectStep;
+            })
+            .attr("y", function (d) {
+                return height - padding.bottom - d;
+            })
+            .attr("dx", rectWidth / 2)
+            .attr("dy", "1em")
+            .text(function (d) {
+                return d;
+            });
 
-</script> 
+        // 文字的enter ===============
+        enterText.append("text")
+            .attr("fill", "white")
+            .attr("font-size", "14px")
+            .attr("text-anchor", "middle")
+            .attr("x", function (d, i) {
+                return padding.left + i * rectStep;
+            })
+            .attr("y", function (d) {
+                return height - padding.bottom - d;
+            })
+            .attr("dx", rectWidth / 2)
+            .attr("dy", "1em")
+            .text(function (d) {
+                return d;
+            });
+
+        // 文字的exit =================
+        exitText.remove();
+    }
+
+    // 排序函数 ===================
+    function mysort() {
+        dataset.sort(d3.ascending);
+        draw(); // 重新绘制
+    }
+
+    // 新增数据 ===================
+    function myadd() {
+        dataset.push(10 + Math.floor(Math.random() * 100)); // 新增随机数
+        draw();
+    }
+
+    // 删除数据 ===================
+    function mydelete() {
+        dataset.splice(0, 1); // 删除第一个数据
+        draw();
+    }
+
+</script>
 </body>
 </html>

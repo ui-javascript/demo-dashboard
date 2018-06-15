@@ -7,25 +7,25 @@
 import Vue from 'vue';
 
 export function classifyProps(obj, propsMap) {
-   let tempProps = {};
+    let tempProps = {};
 
-   Object.keys(propsMap).forEach(item => {
-      if (obj.hasOwnProperty(item)) {
-         tempProps[item] = propsMap[item];
-      } else {
-         Vue.set(obj, item, propsMap[item]);
-      }
-   });
+    Object.keys(propsMap).forEach(item => {
+        if (obj.hasOwnProperty(item)) {
+            tempProps[item] = propsMap[item];
+        } else {
+            Vue.set(obj, item, propsMap[item]);
+        }
+    });
 
-   return tempProps;
+    return tempProps;
 }
 
 export default function merge(obj, ...propsMapList) {
-   let mergeProps = {};
+    let mergeProps = {};
 
-   propsMapList.forEach(propsMap => {
-      mergeProps = Object.assign(mergeProps, classifyProps(obj, propsMap));
-   });
+    propsMapList.forEach(propsMap => {
+        mergeProps = Object.assign(mergeProps, classifyProps(obj, propsMap));
+    });
 
-   return Object.assign({}, obj, mergeProps);
+    return Object.assign({}, obj, mergeProps);
 }

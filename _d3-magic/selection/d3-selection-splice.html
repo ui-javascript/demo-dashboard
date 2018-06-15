@@ -14,48 +14,50 @@
 </main>
 <script src="http://cdn.bootcss.com/d3/3.5.17/d3.js"></script>
 <script>
-// splice方法演示 ====================
-var numbers = [10, 13, 16, 19, 22, 25];
+    // splice方法演示 ====================
+    var numbers = [10, 13, 16, 19, 22, 25];
 
-var iLeft = d3.bisectLeft(numbers.sort(d3.ascending), 18);
-numbers.splice(iLeft, 0, 77);
+    var iLeft = d3.bisectLeft(numbers.sort(d3.ascending), 18);
+    numbers.splice(iLeft, 0, 77);
 
-console.log(numbers);
+    console.log(numbers);
 
-// range方法演示 ======================
-var a = d3.range(10);
-console.log(a);
+    // range方法演示 ======================
+    var a = d3.range(10);
+    console.log(a);
 
-var b = d3.range(2, 10); // 取不到10
-console.log(b);
+    var b = d3.range(2, 10); // 取不到10
+    console.log(b);
 
-var c = d3.range(2, 10, 2);
-console.log(c);
+    var c = d3.range(2, 10, 2);
+    console.log(c);
 
-// permute方法演示 ====================
-var animals = ["cat", "dog", "bird"];
-var newAnimals = d3.permute(animals, [2, 1, 0]);
-console.log(newAnimals); // animals不会改变
+    // permute方法演示 ====================
+    var animals = ["cat", "dog", "bird"];
+    var newAnimals = d3.permute(animals, [2, 1, 0]);
+    console.log(newAnimals); // animals不会改变
 
-// zip方法演示 ========================
-// 数组的数组
-var zip = d3.zip( [1000, 1001, 1002], 
-                   ["jack", "mary", "henry"],
-                   [true, false, true]); // 长度要一致
-console.log(zip);
+    // zip方法演示 ========================
+    // 数组的数组
+    var zip = d3.zip([1000, 1001, 1002],
+        ["jack", "mary", "henry"],
+        [true, false, true]); // 长度要一致
+    console.log(zip);
 
-// 求向量的内积 =======================
-var x1 = [10, 20, 5];
-var x2 = [-5, 10, 3];
-var x3 = d3.sum(d3.zip(x1,x2), function(d) { return d[0]*d[1]; }); // sum处理
-console.log(x3); // 165
+    // 求向量的内积 =======================
+    var x1 = [10, 20, 5];
+    var x2 = [-5, 10, 3];
+    var x3 = d3.sum(d3.zip(x1, x2), function (d) {
+        return d[0] * d[1];
+    }); // sum处理
+    console.log(x3); // 165
 
-// 矩阵转置 ===========================
-var matrix = [ [1, 2, 3], [4, 5, 6]];
-var transposedMatrix = d3.transpose(matrix);
-console.log(transposedMatrix);
+    // 矩阵转置 ===========================
+    var matrix = [[1, 2, 3], [4, 5, 6]];
+    var transposedMatrix = d3.transpose(matrix);
+    console.log(transposedMatrix);
 
 
-</script>    
+</script>
 </body>
 </html>

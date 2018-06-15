@@ -6,7 +6,7 @@ const config = require('../config');
 
 // 设置默认环境
 if (!process.env.NODE_ENV) {
-   process.env.NODE_ENV = JSON.parse(config.dev.env.NODE_ENV);
+    process.env.NODE_ENV = JSON.parse(config.dev.env.NODE_ENV);
 }
 
 /*
@@ -54,12 +54,12 @@ const compiler = webpack(webpackConfig);
    其他参考文档 https://www.npmjs.com/package/webpack-dev-middleware
 */
 const devMiddleware = require('webpack-dev-middleware')(compiler, {
-   /*
-      在这里（'/config/index.js' dev.assetsPublicPath）设置 publicPath
-      与 webpack-dev-server 异同，可以在这里查看 https://doc.webpack-china.org/configuration/dev-server/
-   */
-   publicPath: webpackConfig.output.publicPath,
-   quiet: true
+    /*
+       在这里（'/config/index.js' dev.assetsPublicPath）设置 publicPath
+       与 webpack-dev-server 异同，可以在这里查看 https://doc.webpack-china.org/configuration/dev-server/
+    */
+    publicPath: webpackConfig.output.publicPath,
+    quiet: true
 });
 /*
    webpack-hot-middleware
@@ -68,8 +68,8 @@ const devMiddleware = require('webpack-dev-middleware')(compiler, {
    使用文档：https://www.npmjs.com/package/webpack-hot-middleware
 */
 const hotMiddleware = require('webpack-hot-middleware')(compiler, {
-   log: false,
-   heartbeat: 2000
+    log: false,
+    heartbeat: 2000
 });
 
 /*
@@ -91,14 +91,14 @@ app.use(hotMiddleware);
    将代理的请求配置挂载到掐动的 express 服务上
    对应 webpack-dev-server 的 'proxy' 配置
 */
-Object.keys(proxyTable).forEach(function(context) {
-   let options = proxyTable[context];
-   if (typeof options === 'string') {
-      options = {
-         target: options
-      };
-   }
-   app.use(proxyMiddleware(options.filter || context, options));
+Object.keys(proxyTable).forEach(function (context) {
+    let options = proxyTable[context];
+    if (typeof options === 'string') {
+        options = {
+            target: options
+        };
+    }
+    app.use(proxyMiddleware(options.filter || context, options));
 });
 
 /*
@@ -123,8 +123,8 @@ const uri = `http://${ip}:${port}`;
 let _resolve;
 let _reject;
 let readyPromise = new Promise((resolve, reject) => {
-   _resolve = resolve;
-   _reject = reject;
+    _resolve = resolve;
+    _reject = reject;
 });
 
 let server;
@@ -136,29 +136,29 @@ console.log('> Starting dev server...');
 
 // 直道打好的包有效后执行回调
 devMiddleware.waitUntilValid(() => {
-   /*
-      portfinder 用于获取 port
-   */
-   portfinder.getPort((err, port) => {
-      if (err) {
-         _reject(err);
-      }
-      process.env.PORT = port;
-      const uri = `http://${ip}:${port}`;
-      console.log(`> Listening at ${uri}\n`);
-      // 如果不是测试环境，自动打开浏览器并跳到我们的开发地址
-      if (autoOpenBrowser && process.env.NODE_ENV !== 'testing') {
-         opn(uri);
-      }
-      server = app.listen(port, ip);
-      //  server = app.listen(port, hostName) 可以在此加入主机名
-      _resolve();
-   });
+    /*
+       portfinder 用于获取 port
+    */
+    portfinder.getPort((err, port) => {
+        if (err) {
+            _reject(err);
+        }
+        process.env.PORT = port;
+        const uri = `http://${ip}:${port}`;
+        console.log(`> Listening at ${uri}\n`);
+        // 如果不是测试环境，自动打开浏览器并跳到我们的开发地址
+        if (autoOpenBrowser && process.env.NODE_ENV !== 'testing') {
+            opn(uri);
+        }
+        server = app.listen(port, ip);
+        //  server = app.listen(port, hostName) 可以在此加入主机名
+        _resolve();
+    });
 });
 
 module.exports = {
-   ready: readyPromise,
-   close: () => {
-      server.close();
-   }
+    ready: readyPromise,
+    close: () => {
+        server.close();
+    }
 };

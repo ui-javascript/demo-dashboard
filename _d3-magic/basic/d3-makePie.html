@@ -18,51 +18,57 @@
 
 <script src="http://cdn.bootcss.com/d3/3.5.17/d3.js"></script>
 <script>
-// create svg
-var width  = 500;   
-var height = 500;   
-var color = d3.scale.category10(); // 配色方案
-var svg = d3.select("main")         
-            .append("svg")          
-            .attr("width", width)   
-            .attr("height", height);
+    // create svg
+    var width = 500;
+    var height = 500;
+    var color = d3.scale.category10(); // 配色方案
+    var svg = d3.select("main")
+        .append("svg")
+        .attr("width", width)
+        .attr("height", height);
 
-// 待可视化的数据 
-var dataset = [{ startAngle: 0 , endAngle: Math.PI * 0.6 },
-               { startAngle: Math.PI * 0.6 , endAngle: Math.PI },
-               { startAngle: Math.PI  , endAngle: Math.PI * 1.7 },
-               { startAngle: Math.PI * 1.7 , endAngle: Math.PI * 2 }];
+    // 待可视化的数据
+    var dataset = [{startAngle: 0, endAngle: Math.PI * 0.6},
+        {startAngle: Math.PI * 0.6, endAngle: Math.PI},
+        {startAngle: Math.PI, endAngle: Math.PI * 1.7},
+        {startAngle: Math.PI * 1.7, endAngle: Math.PI * 2}];
 
-//创建一个弧生成器
-var arcPath = d3.svg.arc()
-                .innerRadius(0)
-                .outerRadius(100);
-           
-//添加路径
-svg.selectAll("path")
-    .data(dataset)
-    .enter()
-    .append("path")
-    .attr("d",function(d){ return arcPath(d); })    
-    .attr("transform","translate(250,250)")
-    .attr("stroke","black")
-    .attr("stroke-width","2px")
-    .attr("fill",function(d,i){ return color(i); });
-    
-//添加文字
-svg.selectAll("text")
-    .data(dataset)
-    .enter()
-    .append("text")
-    .attr("transform",function(d){
-        return "translate(250,250)" + 
+    //创建一个弧生成器
+    var arcPath = d3.svg.arc()
+        .innerRadius(0)
+        .outerRadius(100);
+
+    //添加路径
+    svg.selectAll("path")
+        .data(dataset)
+        .enter()
+        .append("path")
+        .attr("d", function (d) {
+            return arcPath(d);
+        })
+        .attr("transform", "translate(250,250)")
+        .attr("stroke", "black")
+        .attr("stroke-width", "2px")
+        .attr("fill", function (d, i) {
+            return color(i);
+        });
+
+    //添加文字
+    svg.selectAll("text")
+        .data(dataset)
+        .enter()
+        .append("text")
+        .attr("transform", function (d) {
+            return "translate(250,250)" +
                 "translate(" + arcPath.centroid(d) + ")"; // 计算弧的中心位置
-    })
-    .attr("text-anchor","middle")
-    .attr("fill","white")
-    .attr("font-size","18px")
-    .text(function(d){ return Math.floor((d.endAngle - d.startAngle)*180/Math.PI) + "°"; });
-    
-</script>    
+        })
+        .attr("text-anchor", "middle")
+        .attr("fill", "white")
+        .attr("font-size", "18px")
+        .text(function (d) {
+            return Math.floor((d.endAngle - d.startAngle) * 180 / Math.PI) + "°";
+        });
+
+</script>
 </body>
 </html>

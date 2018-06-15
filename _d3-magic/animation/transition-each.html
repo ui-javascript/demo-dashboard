@@ -10,61 +10,67 @@
 
 <!-- svg区 -->
 <main>
-    
+
 </main>
 <!-- 辅助区 -->
 <aside>
-    
+
 </aside>
 
 <script src="http://cdn.bootcss.com/d3/3.5.17/d3.js"></script>
 <script>
-// 创建svg
-var width  = 500;	
-var height = 500;
-var svg = d3.select("main")			
-			.append("svg")			
-			.attr("width", width)	
-			.attr("height", height);
-			
-// 待可视化的数据			
-var dataset = [100, 100, 100];	
+    // 创建svg
+    var width = 500;
+    var height = 500;
+    var svg = d3.select("main")
+        .append("svg")
+        .attr("width", width)
+        .attr("height", height);
 
-// 分组元素	
-var g = svg.append("g");
-var rect = g.selectAll("rect")
-				.data(dataset)
-				.enter()
-				.append("rect")
-				.attr("fill","steelblue")
-				.attr("id",function(d,i){ return "rect" + i; })
-				.attr("x",10)
-				.attr("y",function(d,i){ return 10 + i * 35; })
-				.attr("width",function(d,i){ return d; })
-				.attr("height",30);
-			
-g.transition()
-	.duration(2000)
-	.selectAll("rect")
-	.each("start",function(d,i){
-		console.log("start");
-	})
-	.each("interrupt",function(d,i){
-		console.log("interrupt");
-	})
-	.each("end",function(d,i){
-		console.log("end");
-	})
-	.attr("width",300);
-	
-// 用于触发interrupt	
-// 所以不会log出end				
-setTimeout(function(){
-	g.transition()
-		.selectAll("rect")
-		.attr("width",10);
-},1000);
+    // 待可视化的数据
+    var dataset = [100, 100, 100];
 
-</script>    
+    // 分组元素
+    var g = svg.append("g");
+    var rect = g.selectAll("rect")
+        .data(dataset)
+        .enter()
+        .append("rect")
+        .attr("fill", "steelblue")
+        .attr("id", function (d, i) {
+            return "rect" + i;
+        })
+        .attr("x", 10)
+        .attr("y", function (d, i) {
+            return 10 + i * 35;
+        })
+        .attr("width", function (d, i) {
+            return d;
+        })
+        .attr("height", 30);
+
+    g.transition()
+        .duration(2000)
+        .selectAll("rect")
+        .each("start", function (d, i) {
+            console.log("start");
+        })
+        .each("interrupt", function (d, i) {
+            console.log("interrupt");
+        })
+        .each("end", function (d, i) {
+            console.log("end");
+        })
+        .attr("width", 300);
+
+    // 用于触发interrupt
+    // 所以不会log出end
+    setTimeout(function () {
+        g.transition()
+            .selectAll("rect")
+            .attr("width", 10);
+    }, 1000);
+
+</script>
 </body>
 </html>

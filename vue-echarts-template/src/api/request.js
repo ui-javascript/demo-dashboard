@@ -11,57 +11,57 @@ console.log(basicHost);
 
 // 删除底部 '/'
 function deleteSlash(host) {
-   return host.replace(/\/$/, '');
+    return host.replace(/\/$/, '');
 }
 
 // 添加头部 '/'
 function addSlash(path) {
-   return /^\//.test(path) ? path : `/${path}`;
+    return /^\//.test(path) ? path : `/${path}`;
 }
 
 // 解析参数
 function separateParams(url) {
-   const [path = '', paramsLine = ''] = url.split('?');
+    const [path = '', paramsLine = ''] = url.split('?');
 
-   let params = {};
+    let params = {};
 
-   paramsLine.split('&').forEach(item => {
-      const [key, value] = item.split('=');
+    paramsLine.split('&').forEach(item => {
+        const [key, value] = item.split('=');
 
-      params[key] = value;
-   });
+        params[key] = value;
+    });
 
-   return { path, params };
+    return {path, params};
 }
 
 // 主要请求方法
 export default function request(config) {
-   let { method, url, data = {}, host, headers } = config;
+    let {method, url, data = {}, host, headers} = config;
 
-   method = (method && method.toUpperCase()) || 'GET';
+    method = (method && method.toUpperCase()) || 'GET';
 
-   const { path, params } = separateParams(url);
+    const {path, params} = separateParams(url);
 
-   url = host
-      ? `${deleteSlash(host)}${addSlash(path)}`
-      : `${deleteSlash(basicHost)}${addSlash(path)}`;
+    url = host
+        ? `${deleteSlash(host)}${addSlash(path)}`
+        : `${deleteSlash(basicHost)}${addSlash(path)}`;
 
-   return axios({
-      url,
-      method,
-      headers,
-      data: method === 'GET' ? undefined : data,
-      params: Object.assign(method === 'GET' ? data : {}, params)
-   }).catch(err => {
-      // 请求出错
-      console.log('request error, HTTP CODE: ', err.response.status);
+    return axios({
+        url,
+        method,
+        headers,
+        data: method === 'GET' ? undefined : data,
+        params: Object.assign(method === 'GET' ? data : {}, params)
+    }).catch(err => {
+        // 请求出错
+        console.log('request error, HTTP CODE: ', err.response.status);
 
-      return Promise.reject(err);
-   });
+        return Promise.reject(err);
+    });
 }
 
 // 一些常用的请求方法
-export const get = (url, data) => request({ url, data });
-export const post = (url, data) => request({ method: 'POST', url, data });
-export const put = (url, data) => request({ method: 'PUT', url, data });
-export const del = (url, data) => request({ method: 'DELETE', url, data });
+export const get = (url, data) => request({url, data});
+export const post = (url, data) => request({method: 'POST', url, data});
+export const put = (url, data) => request({method: 'PUT', url, data});
+export const del = (url, data) => request({method: 'DELETE', url, data});

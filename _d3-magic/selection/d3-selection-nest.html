@@ -8,26 +8,28 @@
 </head>
 <body>
 <main>
-    
+
 </main>
 
 <script src="http://cdn.bootcss.com/d3/3.5.17/d3.js"></script>
 <script>
 
-// nest用map输出 ==================
-var persons = [
-    {sex:"男", age:48, name:"张某某"},
-    {sex:"男", age:42, name:"李某某"},
-    {sex:"男", age:45, name:"王某某"},
-    {sex:"女", age:33, name:"赵某某"},
-    {sex:"女", age:31, name:"孙某某"}
-                    ]; 
+    // nest用map输出 ==================
+    var persons = [
+        {sex: "男", age: 48, name: "张某某"},
+        {sex: "男", age: 42, name: "李某某"},
+        {sex: "男", age: 45, name: "王某某"},
+        {sex: "女", age: 33, name: "赵某某"},
+        {sex: "女", age: 31, name: "孙某某"}
+    ];
 
-var map = d3.nest()
-            .key(function(d) { return d.sex; })
-            .map(persons, d3.map);
-console.log(map.values());
-    
-</script>    
+    var map = d3.nest()
+        .key(function (d) {
+            return d.sex;
+        })
+        .map(persons, d3.map);
+    console.log(map.values());
+
+</script>
 </body>
 </html>

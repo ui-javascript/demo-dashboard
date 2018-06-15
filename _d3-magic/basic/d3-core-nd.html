@@ -17,7 +17,7 @@
             border-right: 1px solid steelblue;
             border-bottom: 1px solid steelblue;
             background: #fff;
-            font-size:11px;
+            font-size: 11px;
             color: black;
         }
     </style>
@@ -25,8 +25,8 @@
 <body>
 
 <div class="container">
-    <input type="text" id="text-id" /><br>
-    <input type="checkbox" id="checkbox-id" />.property<br>
+    <input type="text" id="text-id"/><br>
+    <input type="checkbox" id="checkbox-id"/>.property<br>
     <div id="text-div-demo"></div>
     <div id="html-div-demo"></div>
     <div id="svg-append-demo"></div>
@@ -35,167 +35,184 @@
     <div id="exit-div-demo"></div>
     <svg width=960 height=100 id="fliter-svg-demo"></svg>
     <div id="datum-div-demo">
-       <div data-username="D3 user"></div>
-       <div data-username="D3 fans"></div> 
+        <div data-username="D3 user"></div>
+        <div data-username="D3 fans"></div>
     </div>
-
-
 
 
 </div> <!-- /. container -->
 
 
-    <!-- jQuery v2.1.4 -->
-    <script src="../js/libs/jquery.min.js"></script>
-    <!-- Bootstrap的js文件 -->
-    <!-- <script src="js/libs/bootstrap.min.js"></script> -->
-    <!-- d3的js文件 -->
-    <script type="text/javascript" src="../js/libs/d3.v3.js"></script>
-    <script type="text/javascript">
-        d3.select('#text-id')
-            .property('value', function(){ 
-                return d3.select(this).property('id');  //获取id属性的值
-            }); //设置文本的value属性为此元素的ID值
-        
-        d3.select('#checkbox-id')
-            .property('checked', true); //设置复选框的checked属性
+<!-- jQuery v2.1.4 -->
+<script src="../js/libs/jquery.min.js"></script>
+<!-- Bootstrap的js文件 -->
+<!-- <script src="js/libs/bootstrap.min.js"></script> -->
+<!-- d3的js文件 -->
+<script type="text/javascript" src="../js/libs/d3.v3.js"></script>
+<script type="text/javascript">
+    d3.select('#text-id')
+        .property('value', function () {
+            return d3.select(this).property('id');  //获取id属性的值
+        }); //设置文本的value属性为此元素的ID值
 
-        d3.select('#text-div-demo').text("hello world!");  //设置元素的文本   
-        d3.select('#text-div-demo')
-            .text(function(){ 
-                return "new text: "+d3.select(this).text();
-            }); //设置元素的文本
+    d3.select('#checkbox-id')
+        .property('checked', true); //设置复选框的checked属性
 
-        d3.select('#html-div-demo').html("<h1>大家好，我是H1！</h1>"); //设置innerHTML的内容       
-        d3.select('#html-div-demo')
-            .html(function (d, i) { //用函数设置innerHTML的内容
-                var old = d3.select(this).html(); //获取innerHTML的内容
-                var newHtml = old + "<h2>大家好，我是H2！</h3>";
-                return newHtml;
-            });
+    d3.select('#text-div-demo').text("hello world!");  //设置元素的文本
+    d3.select('#text-div-demo')
+        .text(function () {
+            return "new text: " + d3.select(this).text();
+        }); //设置元素的文本
 
-        //向body标签追加子元素svg
-        var svg = d3.select('#svg-append-demo')
-            .append('svg');
+    d3.select('#html-div-demo').html("<h1>大家好，我是H1！</h1>"); //设置innerHTML的内容
+    d3.select('#html-div-demo')
+        .html(function (d, i) { //用函数设置innerHTML的内容
+            var old = d3.select(this).html(); //获取innerHTML的内容
+            var newHtml = old + "<h2>大家好，我是H2！</h3>";
+            return newHtml;
+        });
 
-        //向svg元素追加有svg命名空间的rect子元素
-        svg.append('svg:rect')
-            .attr({
-                x: 10,
-                y: 10,
-                width: 100,
-                height: 40,
-                fill: "orange"
-            });
+    //向body标签追加子元素svg
+    var svg = d3.select('#svg-append-demo')
+        .append('svg');
 
-
-        //插入svg元素
-        var svg_nd = d3.select("#svg-append-demo").insert("svg");
-
-        //插入rect元素
-        svg_nd.insert('svg:rect')
-            .attr({
-                x: 10,
-                y: 100,
-                width: 100,
-                height: 40,
-                fill: "forestgreen"
-            });
-
-        //在rect元素前插入circle元素
-        svg_nd.insert('circle', 'rect')
-            .attr({
-                cx: 60,
-                cy: 75,
-                r: 25,
-                fill:"slateblue"
-            });
-
-        //移除插入的circle元素
-        var removed = d3.select("circle").remove();
-        console.log(removed);
-
-        //定义一个二维数组
-        var matrix = [
-          [11975,  5871, 8916, 2868],
-          [ 1951, 10048, 2060, 6171],
-          [ 8010, 16145, 8090, 8045],
-          [ 1013,   990,  940, 6907]
-        ];
-
-        var tr = d3.select("#data-matrix-demo").append("table").selectAll("tr")
-            .data(matrix)   //绑定二维数组，给表格的每行传递一个子数组
-          .enter().append("tr");
-
-        var td = tr.selectAll("td")
-            .data(function(d) { return d; })    //绑定子数组，给每行的每列传递子数组中的数字
-          .enter().append("td")
-            .text(function(d) { return d; });
-
-        //生成text元素的数据
-        var data = [ "text1","text2","text3","text4"];
-
-        //新增元素
-        d3.select("svg").selectAll('text')
-            .data(data) //绑定数据
-            .enter()        //返回新元素的占位符
-            .append('text') //新增新元素
-            .attr({
-                x: '20',
-                y: function (d, i) { return 20 + 20 * i; }
-            })
-            .text(function (d, i) { return d; });   
+    //向svg元素追加有svg命名空间的rect子元素
+    svg.append('svg:rect')
+        .attr({
+            x: 10,
+            y: 10,
+            width: 100,
+            height: 40,
+            fill: "orange"
+        });
 
 
-        //生成6个div标签，内容是1, 2, 3, 4, 5, 6
-        d3.select("body").selectAll("div")
-            .data([1, 2, 3, 4, 5, 6])
-            .enter()
-            .append("div")
-            .text(function(d) { return d; });
-        
-        //更新绑定的数组
-        divs=d3.select("#exit-div-demo").selectAll("div")
-            .data([4, 5, 6, 7, 8, 9], function(d) { return d; })
-        
-        //用新数组生成div标签
-        divs.enter()
-            .append("div")
-            .text(function(d) { return d; });
-        
-        //将第一个数组中退出的数据对应的元素删除
-        divs.exit().remove()
-        
-        //增加索引属性
-        d3.selectAll("div").attr("index", function(d, i) { return i; });
+    //插入svg元素
+    var svg_nd = d3.select("#svg-append-demo").insert("svg");
+
+    //插入rect元素
+    svg_nd.insert('svg:rect')
+        .attr({
+            x: 10,
+            y: 100,
+            width: 100,
+            height: 40,
+            fill: "forestgreen"
+        });
+
+    //在rect元素前插入circle元素
+    svg_nd.insert('circle', 'rect')
+        .attr({
+            cx: 60,
+            cy: 75,
+            r: 25,
+            fill: "slateblue"
+        });
+
+    //移除插入的circle元素
+    var removed = d3.select("circle").remove();
+    console.log(removed);
+
+    //定义一个二维数组
+    var matrix = [
+        [11975, 5871, 8916, 2868],
+        [1951, 10048, 2060, 6171],
+        [8010, 16145, 8090, 8045],
+        [1013, 990, 940, 6907]
+    ];
+
+    var tr = d3.select("#data-matrix-demo").append("table").selectAll("tr")
+        .data(matrix)   //绑定二维数组，给表格的每行传递一个子数组
+        .enter().append("tr");
+
+    var td = tr.selectAll("td")
+        .data(function (d) {
+            return d;
+        })    //绑定子数组，给每行的每列传递子数组中的数字
+        .enter().append("td")
+        .text(function (d) {
+            return d;
+        });
+
+    //生成text元素的数据
+    var data = ["text1", "text2", "text3", "text4"];
+
+    //新增元素
+    d3.select("svg").selectAll('text')
+        .data(data) //绑定数据
+        .enter()        //返回新元素的占位符
+        .append('text') //新增新元素
+        .attr({
+            x: '20',
+            y: function (d, i) {
+                return 20 + 20 * i;
+            }
+        })
+        .text(function (d, i) {
+            return d;
+        });
 
 
-        //新增元素
-        d3.select('#fliter-svg-demo').selectAll('text')
-            .data(data)     //绑定数据
-            .enter()        //返回新元素的占位符
-            .append('text') //新增新元素
-            .attr({
-                x: '20',
-                y: function (d, i) {
-                    return 20 + 20 * i;
-                },
-                fill:"tomato"
-            }).text(function (d, i) { return d; });
-        
-        //过滤奇数索引的text，并设置其文本填充色为blue
-        d3.select('#fliter-svg-demo').selectAll('text').filter(function(d, i) {
-            return i % 2 == 0;
-        }).style("fill", "royalblue");
+    //生成6个div标签，内容是1, 2, 3, 4, 5, 6
+    d3.select("body").selectAll("div")
+        .data([1, 2, 3, 4, 5, 6])
+        .enter()
+        .append("div")
+        .text(function (d) {
+            return d;
+        });
 
-        d3.select('#datum-div-demo').selectAll("div")
-        .datum(function() { return this.dataset; }) //获取HTML5自定义数据属性
-        .text(function(d){ return d.username;});    //使用获取的数据设置文本的值
+    //更新绑定的数组
+    divs = d3.select("#exit-div-demo").selectAll("div")
+        .data([4, 5, 6, 7, 8, 9], function (d) {
+            return d;
+        })
 
-        
+    //用新数组生成div标签
+    divs.enter()
+        .append("div")
+        .text(function (d) {
+            return d;
+        });
+
+    //将第一个数组中退出的数据对应的元素删除
+    divs.exit().remove()
+
+    //增加索引属性
+    d3.selectAll("div").attr("index", function (d, i) {
+        return i;
+    });
 
 
+    //新增元素
+    d3.select('#fliter-svg-demo').selectAll('text')
+        .data(data)     //绑定数据
+        .enter()        //返回新元素的占位符
+        .append('text') //新增新元素
+        .attr({
+            x: '20',
+            y: function (d, i) {
+                return 20 + 20 * i;
+            },
+            fill: "tomato"
+        }).text(function (d, i) {
+        return d;
+    });
 
-    </script>
+    //过滤奇数索引的text，并设置其文本填充色为blue
+    d3.select('#fliter-svg-demo').selectAll('text').filter(function (d, i) {
+        return i % 2 == 0;
+    }).style("fill", "royalblue");
+
+    d3.select('#datum-div-demo').selectAll("div")
+        .datum(function () {
+            return this.dataset;
+        }) //获取HTML5自定义数据属性
+        .text(function (d) {
+            return d.username;
+        });    //使用获取的数据设置文本的值
+
+
+</script>
 </body>
 </html>

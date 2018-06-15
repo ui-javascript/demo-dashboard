@@ -12,7 +12,7 @@
             stroke: black;
             shape-rendering: crispEdges;
         }
-         
+
         .axis text {
             font-family: sans-serif;
             font-size: 11px;
@@ -28,32 +28,32 @@
 
 <script src="http://cdn.bootcss.com/d3/3.5.17/d3.js"></script>
 <script>
-var width = 600;
-var height = 600;
+    var width = 600;
+    var height = 600;
 
-var svg = d3.select("main").append("svg")
-                .attr("width",width)
-                .attr("height",height);
+    var svg = d3.select("main").append("svg")
+        .attr("width", width)
+        .attr("height", height);
 
-// 用于坐标轴的线性比例尺
-var xScale = d3.scale.linear()
-                .domain([0,10])
-                .range([0,300]);
- 
-// 在svg中添加一个包含坐标轴各元素的g元素 
-// g元素控制元素               
-var axis = d3.svg.axis()
-                .scale(xScale)
-                .orient("bottom");
+    // 用于坐标轴的线性比例尺
+    var xScale = d3.scale.linear()
+        .domain([0, 10])
+        .range([0, 300]);
 
-// 分组元素             
-var gAxis = svg.append("g")
-            .attr("transform","translate(80,80)");
-            
-gAxis.attr("class","axis"); // 添加样式，修改原始坐标轴
-            
-// axis(gAxis);
-gAxis.call(axis); // 比上面的方法更常用  
-</script>    
+    // 在svg中添加一个包含坐标轴各元素的g元素
+    // g元素控制元素
+    var axis = d3.svg.axis()
+        .scale(xScale)
+        .orient("bottom");
+
+    // 分组元素
+    var gAxis = svg.append("g")
+        .attr("transform", "translate(80,80)");
+
+    gAxis.attr("class", "axis"); // 添加样式，修改原始坐标轴
+
+    // axis(gAxis);
+    gAxis.call(axis); // 比上面的方法更常用
+</script>
 </body>
 </html>

@@ -6,15 +6,16 @@
     <script type="text/javascript" src="js/jquery.min.js"></script>
     <style type="text/css">
         #container, #sliders {
-            min-width: 310px; 
+            min-width: 310px;
             max-width: 800px;
             margin: 0 auto;
         }
+
         #container {
-            height: 400px; 
+            height: 400px;
         }
-	</style>
-	<script type="text/javascript">
+    </style>
+    <script type="text/javascript">
         $(function () {
 
             /*柱状图设置=====================*/
@@ -54,14 +55,14 @@
                     valueSuffix: '人'
                 },
                 series: [
-                {
-                    name: '理论乘坐人数',
-                    data: [78, 89, 95, 85, 82, 85, 85, 86, 83, 83, 89, 96]
-                }
-                ,{
-                    name: '实际乘坐人数',
-                    data: [82, 88, 87, 93, 80, 80, 88, 81, 81, 81, 86, 95]
-                } 
+                    {
+                        name: '理论乘坐人数',
+                        data: [78, 89, 95, 85, 82, 85, 85, 86, 83, 83, 89, 96]
+                    }
+                    , {
+                        name: '实际乘坐人数',
+                        data: [82, 88, 87, 93, 80, 80, 88, 81, 81, 81, 86, 95]
+                    }
                 ]
             });
 
@@ -85,28 +86,29 @@
             // alert(chart.title.textStr);  //获取标题
 
             /*获取json文件数据=====================*/
-            var url =  "userinfo.json";   //json文件的路径
-            $.getJSON(url,function(data) { 
-                var i,len=data.length; 
-                for(i=0;i<len;i++) {
+            var url = "userinfo.json";   //json文件的路径
+            $.getJSON(url, function (data) {
+                var i, len = data.length;
+                for (i = 0; i < len; i++) {
                     chart.series[i].update({
-                    name: data[i].name,
-                    data: data[i].data}); 
+                        name: data[i].name,
+                        data: data[i].data
+                    });
                 }
             });
 
         });
-		</script>
+    </script>
 </head>
 <body>
 
-    <script src="js/highcharts.js"></script>
-    <script src="js/highcharts-3d.js"></script>
-    <script src="js/modules/exporting.js"></script>
+<script src="js/highcharts.js"></script>
+<script src="js/highcharts-3d.js"></script>
+<script src="js/modules/exporting.js"></script>
 
-    <div id="container"></div>
+<div id="container"></div>
 
-    <!-- 操作杆========= -->
+<!-- 操作杆========= -->
 <!-- 
     <div id="sliders">
         <table>
@@ -124,6 +126,6 @@
             </tr>
         </table>
     </div> -->
-    
+
 </body>
 </html>

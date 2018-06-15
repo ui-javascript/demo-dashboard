@@ -11,36 +11,40 @@
 </head>
 <body>
 <main>
-<!-- <p></p> -->
+    <!-- <p></p> -->
 </main>
 
 <script src="http://cdn.bootcss.com/d3/3.5.17/d3.js"></script>
 <script>
 
-var dataset = [10, 20, 30];
-var p = d3.select("main").selectAll("p");
+    var dataset = [10, 20, 30];
+    var p = d3.select("main").selectAll("p");
 
-// 分区返回
-var update = p.data(dataset);
-var enter = update.enter();
-var exit = update.exit();
+    // 分区返回
+    var update = p.data(dataset);
+    var enter = update.enter();
+    var exit = update.exit();
 
-// 分区处理
-update.text(function(d) { return d; });
-enter.append("p")
-     .filter(function(d, i) {
-         if(d > 10) {
-            return true;
-         } else {
-            return false;
-         }
-     }) // 之前main里有p 直接绑上去了一个 ，所以10还在
-     .sort(function(a, b) {
-        return b-a; // 从大到小排序
-     })
-     .text( function(d) { return d; });
-exit.remove();
+    // 分区处理
+    update.text(function (d) {
+        return d;
+    });
+    enter.append("p")
+        .filter(function (d, i) {
+            if (d > 10) {
+                return true;
+            } else {
+                return false;
+            }
+        }) // 之前main里有p 直接绑上去了一个 ，所以10还在
+        .sort(function (a, b) {
+            return b - a; // 从大到小排序
+        })
+        .text(function (d) {
+            return d;
+        });
+    exit.remove();
 
-</script>    
+</script>
 </body>
 </html>

@@ -21,133 +21,138 @@
 
 <script src="http://cdn.bootcss.com/d3/3.5.17/d3.js"></script>
 <script>
-// 线性比例尺 ======================= 
-var linear = d3.scale.linear()
-                .domain([0,20])
-                .range([0,100]);
-                
-console.log( linear(10) ); // 50
-console.log( linear(30) ); // 150
-console.log( linear.invert(80) ); // 16 返回定义域对应值
+    // 线性比例尺 =======================
+    var linear = d3.scale.linear()
+        .domain([0, 20])
+        .range([0, 100]);
 
-linear.clamp(true);     // 把30收进domain
-console.log( linear(22) ); // 100 即值域max
+    console.log(linear(10)); // 50
+    console.log(linear(30)); // 150
+    console.log(linear.invert(80)); // 16 返回定义域对应值
 
-linear.rangeRound([0,100]);   // 四舍五入
-console.log( linear(13.33) ); // 返回67
+    linear.clamp(true);     // 把30收进domain
+    console.log(linear(22)); // 100 即值域max
 
-linear.domain([0.12300000,0.4888888888]).nice(); 
-console.log( linear.domain() ); // [0.1, 0.5]
-linear.domain([33.611111,45.97745]).nice(); 
-console.log( linear.domain() ); // [33, 46]
+    linear.rangeRound([0, 100]);   // 四舍五入
+    console.log(linear(13.33)); // 返回67
 
-
-// 线性比例尺2 =============================
-var linear2 = d3.scale.linear()
-                .domain([-20,20])
-                .range([0,100]);
-
-var ticks = linear2.ticks(5);
-// alert(ticks);
-console.log(ticks); // -20 -10 0 10 20
-
-var tickFormat = linear2.tickFormat(5,"+");
-for(var i=0;i<ticks.length;i++){
-    ticks[i] = tickFormat(ticks[i]);
-}
-// alert(ticks);
-console.log(ticks); // -20 -10 0 +10 +20
+    linear.domain([0.12300000, 0.4888888888]).nice();
+    console.log(linear.domain()); // [0.1, 0.5]
+    linear.domain([33.611111, 45.97745]).nice();
+    console.log(linear.domain()); // [33, 46]
 
 
-// 线性比例尺3 ==============================
-var linear3 = d3.scale.linear()
-                .domain([0, 20, 40])
-                .range([0, 100, 150]);
-console.log(linear3(30)); // 125 分段函数
+    // 线性比例尺2 =============================
+    var linear2 = d3.scale.linear()
+        .domain([-20, 20])
+        .range([0, 100]);
+
+    var ticks = linear2.ticks(5);
+    // alert(ticks);
+    console.log(ticks); // -20 -10 0 10 20
+
+    var tickFormat = linear2.tickFormat(5, "+");
+    for (var i = 0; i < ticks.length; i++) {
+        ticks[i] = tickFormat(ticks[i]);
+    }
+    // alert(ticks);
+    console.log(ticks); // -20 -10 0 +10 +20
 
 
-// 指数比例尺 ===============================
-// 仅相当于调用JS的数学函数
-var pow = d3.scale.pow().exponent(3);
-console.log( pow(2) ); // 8
-console.log( pow(3) ); // 27
-
-pow.exponent(0.5);
-console.log( pow(2) ); // 1.414
-console.log( pow(3) ); // 1.732
+    // 线性比例尺3 ==============================
+    var linear3 = d3.scale.linear()
+        .domain([0, 20, 40])
+        .range([0, 100, 150]);
+    console.log(linear3(30)); // 125 分段函数
 
 
-// 指数比例尺2 ===============================
-// 结合真正体现D3 结合数据域
-// 指数比例尺其实调用了线性比例尺
-var pow2 = d3.scale.pow()
-                .exponent(3)
-                .domain([0,3])
-                .range([0,90]);
-                
-var tmpLinear = d3.scale.linear()
-                .domain([0,Math.pow(3,3)])
-                .range([0,90]);
-                
-console.log( pow2(1.5) );               // 11.25
-console.log( tmpLinear(Math.pow(1.5,3)) ); // 11.25
+    // 指数比例尺 ===============================
+    // 仅相当于调用JS的数学函数
+    var pow = d3.scale.pow().exponent(3);
+    console.log(pow(2)); // 8
+    console.log(pow(3)); // 27
+
+    pow.exponent(0.5);
+    console.log(pow(2)); // 1.414
+    console.log(pow(3)); // 1.732
 
 
-// 量子比例尺 ===============================
-// 定义域是连续的，值域是离散的
-// 适合处理数值对应颜色的问题
-var quantize = d3.scale.quantize()
-                .domain([50,0])
-                .range(["#888","#666","#444","#222","#000"]);
-                
-var r = [45,35,25,15,5];
+    // 指数比例尺2 ===============================
+    // 结合真正体现D3 结合数据域
+    // 指数比例尺其实调用了线性比例尺
+    var pow2 = d3.scale.pow()
+        .exponent(3)
+        .domain([0, 3])
+        .range([0, 90]);
 
-var svg = d3.select("main").append("svg")
-                .attr("width",400)
-                .attr("height",400);
+    var tmpLinear = d3.scale.linear()
+        .domain([0, Math.pow(3, 3)])
+        .range([0, 90]);
 
-svg.selectAll("circle")
-    .data(r)
-    .enter()
-    .append("circle")
-    .attr("cx",function(d,i){ return 50 + i * 30; })
-    .attr("cy",50)
-    .attr("r",function(d){ return d; })
-    .attr("fill",function(d){ return quantize(d); });
-
-// 量子比例尺和分子比例尺的区别 ==============================
-// 量子比例尺和中间的数值无关
-// 分位比例尺的分段值是3
-// 这个例子的数值可能错了，与书上有出入
-/*
-var quantize = d3.scale.quantize().domain([0,2,8,10]).range([1,100]),
-    quantile = d3.scale.quantile().domain([0,2,5,10]).range([1,100]);
-
-console.log( quantize(4.99) ); // 1
-console.log( quantize(5) );    // 100
-console.log( quantile(2.99) ); // 1
-console.log( quantile(3) );    // 100
-console.log( quantile.quantiles() ); // 查询分位比例尺的分段值
-*/
-
-// 阈值比例尺 =====================================
-// 阈值又叫临界值
-var threshold = d3.scale.threshold()
-                .domain([10,20,30])
-                .range(["red","green","blue","black"]);
-                
-console.log( threshold(5) );  // red
-console.log( threshold(15) ); // green
-console.log( threshold(25) ); // blue
-console.log( threshold(35) ); // black
-
-console.log( threshold.invertExtent("red") );    // [unddfined, 10]
-console.log( threshold.invertExtent("green") );  // [10, 20]
-console.log( threshold.invertExtent("blue") );   // [20, 30]
-console.log( threshold.invertExtent("black") );  // [30, undefined]
+    console.log(pow2(1.5));               // 11.25
+    console.log(tmpLinear(Math.pow(1.5, 3))); // 11.25
 
 
+    // 量子比例尺 ===============================
+    // 定义域是连续的，值域是离散的
+    // 适合处理数值对应颜色的问题
+    var quantize = d3.scale.quantize()
+        .domain([50, 0])
+        .range(["#888", "#666", "#444", "#222", "#000"]);
 
-</script>    
+    var r = [45, 35, 25, 15, 5];
+
+    var svg = d3.select("main").append("svg")
+        .attr("width", 400)
+        .attr("height", 400);
+
+    svg.selectAll("circle")
+        .data(r)
+        .enter()
+        .append("circle")
+        .attr("cx", function (d, i) {
+            return 50 + i * 30;
+        })
+        .attr("cy", 50)
+        .attr("r", function (d) {
+            return d;
+        })
+        .attr("fill", function (d) {
+            return quantize(d);
+        });
+
+    // 量子比例尺和分子比例尺的区别 ==============================
+    // 量子比例尺和中间的数值无关
+    // 分位比例尺的分段值是3
+    // 这个例子的数值可能错了，与书上有出入
+    /*
+    var quantize = d3.scale.quantize().domain([0,2,8,10]).range([1,100]),
+        quantile = d3.scale.quantile().domain([0,2,5,10]).range([1,100]);
+
+    console.log( quantize(4.99) ); // 1
+    console.log( quantize(5) );    // 100
+    console.log( quantile(2.99) ); // 1
+    console.log( quantile(3) );    // 100
+    console.log( quantile.quantiles() ); // 查询分位比例尺的分段值
+    */
+
+    // 阈值比例尺 =====================================
+    // 阈值又叫临界值
+    var threshold = d3.scale.threshold()
+        .domain([10, 20, 30])
+        .range(["red", "green", "blue", "black"]);
+
+    console.log(threshold(5));  // red
+    console.log(threshold(15)); // green
+    console.log(threshold(25)); // blue
+    console.log(threshold(35)); // black
+
+    console.log(threshold.invertExtent("red"));    // [unddfined, 10]
+    console.log(threshold.invertExtent("green"));  // [10, 20]
+    console.log(threshold.invertExtent("blue"));   // [20, 30]
+    console.log(threshold.invertExtent("black"));  // [30, undefined]
+
+
+</script>
 </body>
 </html>

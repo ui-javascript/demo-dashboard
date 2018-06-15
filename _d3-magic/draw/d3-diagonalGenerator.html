@@ -18,53 +18,57 @@
 
 <script src="http://cdn.bootcss.com/d3/3.5.17/d3.js"></script>
 <script>
-// create svg
-var width  = 500;   
-var height = 500;  
-var svg = d3.select("body")    
-            .append("svg")        
-            .attr("width", width)   
-            .attr("height", height);
+    // create svg
+    var width = 500;
+    var height = 500;
+    var svg = d3.select("body")
+        .append("svg")
+        .attr("width", width)
+        .attr("height", height);
 
-// 待可视化的数据
-var dataset = { source:{ x: 100 , y: 100 },
-                target:{ x: 300 , y: 200 }};
+    // 待可视化的数据
+    var dataset = {
+        source: {x: 100, y: 100},
+        target: {x: 300, y: 200}
+    };
 
-//创建一个对角线生成器
-var diagonal = d3.svg.diagonal(); // 三次贝塞尔曲线
-                
-//添加路径
-svg.append("path")
-    .attr("d",diagonal(dataset)  )  
-    .attr("fill","none")
-    .attr("stroke","black")
-    .attr("stroke-width",3);
+    //创建一个对角线生成器
+    var diagonal = d3.svg.diagonal(); // 三次贝塞尔曲线
+
+    //添加路径
+    svg.append("path")
+        .attr("d", diagonal(dataset))
+        .attr("fill", "none")
+        .attr("stroke", "black")
+        .attr("stroke-width", 3);
 
 
-// 对角线生成器的投影 ======
-var svg2 = d3.select("body")        
-            .append("svg")        
-            .attr("width", width)   
-            .attr("height", height);
+    // 对角线生成器的投影 ======
+    var svg2 = d3.select("body")
+        .append("svg")
+        .attr("width", width)
+        .attr("height", height);
 
-var dataset2 = { source:{ x: 100 , y: 100 },
-                target:{ x: 300 , y: 200 }};
+    var dataset2 = {
+        source: {x: 100, y: 100},
+        target: {x: 300, y: 200}
+    };
 
-// 创建一个对角线生成器
-var diagonal2 = d3.svg.diagonal()
-                    .projection(function(d){
-                        var x = d.x * 1.5;
-                        var y = d.y * 1.5;
-                        return [x,y];
-                    });
-                
-// 添加路径
-svg2.append("path")
-    .attr("d",diagonal2(dataset2)  )  
-    .attr("fill","none")
-    .attr("stroke","black")
-    .attr("stroke-width",3);
+    // 创建一个对角线生成器
+    var diagonal2 = d3.svg.diagonal()
+        .projection(function (d) {
+            var x = d.x * 1.5;
+            var y = d.y * 1.5;
+            return [x, y];
+        });
 
-</script>    
+    // 添加路径
+    svg2.append("path")
+        .attr("d", diagonal2(dataset2))
+        .attr("fill", "none")
+        .attr("stroke", "black")
+        .attr("stroke-width", 3);
+
+</script>
 </body>
 </html>

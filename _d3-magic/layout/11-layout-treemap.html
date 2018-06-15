@@ -1,80 +1,98 @@
 ﻿<!DOCTYPE html>
 <html>
-<head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>矩形树图</title>
-    <!-- <link rel="stylesheet" href=""> -->
-    <style>
-      .nodeRect {
-        stroke: white;
-        stroke-width: 2px;
-      }
-      
-      .nodeName {
-        fill: white;
-        font-size: 12px;
-        font-family: simsun;
-      }
-    </style>
-</head>
-<body>
- 
-<main>
-    
-</main>
-<aside>
-    
-</aside>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>矩形树图</title>
+        <!-- <link rel="stylesheet" href=""> -->
+        <style>
+            .nodeRect {
+                stroke: white;
+                stroke-width: 2px;
+            }
+
+            .nodeName {
+                fill: white;
+                font-size: 12px;
+                font-family: simsun;
+            }
+        </style>
+    </head>
+    <body>
+
+        <main>
+
+        </main>
+        <aside>
+
+        </aside>
 
 
-<script src="../js/libs/d3.min.js"></script>
-<script>
+        <script src="../js/libs/d3.min.js"></script>
+        <script>
 
-var width = 1000,
-    height = 500;
-    
-var svg = d3.select("body").append("svg")
-    .attr("width", width)
-    .attr("height", height);
+            var width = 1000,
+                height = 500;
 
-var treemap = d3.layout.treemap()
+            var svg = d3.select("body").append("svg")
+                .attr("width", width)
+                .attr("height", height);
+
+            var treemap = d3.layout.treemap()
                 .size([width, height])
-                .value(function(d){ return d.gdp; });
+                .value(function (d) {
+                    return d.gdp;
+                });
 
-d3.json("citygdp.json", function(error, root) {
+            d3.json("citygdp.json", function (error, root) {
 
-    var nodes = treemap.nodes(root);
-    var links = treemap.links(nodes);
-    
-    console.log(nodes);
-    console.log(links);
-    
-    var color = d3.scale.category10();
+                var nodes = treemap.nodes(root);
+                var links = treemap.links(nodes);
 
-    var groups = svg.selectAll("g")
-                    .data(nodes.filter(function(d){ return !d.children; }))
+                console.log(nodes);
+                console.log(links);
+
+                var color = d3.scale.category10();
+
+                var groups = svg.selectAll("g")
+                    .data(nodes.filter(function (d) {
+                        return !d.children;
+                    }))
                     .enter()
                     .append("g");
-                    
-    var rects = groups.append("rect")
-                    .attr("class","nodeRect")
-                    .attr("x",function(d){ return d.x; })
-                    .attr("y",function(d){ return d.y; })
-                    .attr("width",function(d){ return d.dx; })
-                    .attr("height",function(d){ return d.dy; })
-                    .style("fill",function(d,i){ return color(d.parent.name); });
 
-    var texts = groups.append("text")
-                    .attr("class","nodeName")
-                    .attr("x",function(d){ return d.x; })
-                    .attr("y",function(d){ return d.y; })
-                    .attr("dx","0.5em")
-                    .attr("dy","1.5em")
-                    .text(function(d){ 
-                        return d.name + " " + d.gdp; 
+                var rects = groups.append("rect")
+                    .attr("class", "nodeRect")
+                    .attr("x", function (d) {
+                        return d.x;
+                    })
+                    .attr("y", function (d) {
+                        return d.y;
+                    })
+                    .attr("width", function (d) {
+                        return d.dx;
+                    })
+                    .attr("height", function (d) {
+                        return d.dy;
+                    })
+                    .style("fill", function (d, i) {
+                        return color(d.parent.name);
                     });
-});
-</script>
-</body>
+
+                var texts = groups.append("text")
+                    .attr("class", "nodeName")
+                    .attr("x", function (d) {
+                        return d.x;
+                    })
+                    .attr("y", function (d) {
+                        return d.y;
+                    })
+                    .attr("dx", "0.5em")
+                    .attr("dy", "1.5em")
+                    .text(function (d) {
+                        return d.name + " " + d.gdp;
+                    });
+            });
+        </script>
+    </body>
 </html>

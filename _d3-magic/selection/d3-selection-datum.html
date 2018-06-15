@@ -9,40 +9,40 @@
 <body>
 
 <main>
-  <section id="datum">
-    <p>Fire</p>
-    <p>Water</p>
-    <p>Wind</p>     
-  </section>
+    <section id="datum">
+        <p>Fire</p>
+        <p>Water</p>
+        <p>Wind</p>
+    </section>
 
-  <section id="datum-append">
-    <p>Fire</p>
-    <p>Water</p>
-    <p>Wind</p>    
-  </section>
+    <section id="datum-append">
+        <p>Fire</p>
+        <p>Water</p>
+        <p>Wind</p>
+    </section>
 
 </main>
 
 <script src="http://cdn.bootcss.com/d3/3.5.17/d3.js"></script>
 <script>
 
-var pSet1 = d3.select("#datum").selectAll("p");
-pSet1.datum("Thunder")
- .text(function(d, i) {
-   return d + " " + i;
- });    
+    var pSet1 = d3.select("#datum").selectAll("p");
+    pSet1.datum("Thunder")
+        .text(function (d, i) {
+            return d + " " + i;
+        });
 
-console.log( pSet1 );
+    console.log(pSet1);
 
-var pSet2 = d3.select("#datum-append").selectAll("p");
-pSet2.datum("Thunder")
-  .append("span")
- .text(function(d, i) {
-   return d + " " + i;
- });    
+    var pSet2 = d3.select("#datum-append").selectAll("p");
+    pSet2.datum("Thunder")
+        .append("span")
+        .text(function (d, i) {
+            return d + " " + i;
+        });
 
-console.log( pSet2 );
+    console.log(pSet2);
 
-</script>    
+</script>
 </body>
 </html>

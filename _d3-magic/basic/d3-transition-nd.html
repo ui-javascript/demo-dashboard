@@ -12,105 +12,113 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Qmen | d3过渡2 </title>
     <style type="text/css">
-        
+
     </style>
 </head>
 <body>
 
-    <div id="each-svg-demo"></div>
-    <div id="call-svg-demo"></div>
-    
-    <!-- jQuery v2.1.4 -->
-    <script src="../js/libs/jquery.min.js"></script>
-    <!-- d3的js文件 -->
-    <script type="text/javascript" src="../js/libs/d3.v3.js"></script>
-    <script type="text/javascript">
-        //向body标签增加svg子元素
-        var each_svg = d3.select('#each-svg-demo')
-            .append('svg')
-            .attr({
-                "width": 700,
-                "height": 200,
-            });
+<div id="each-svg-demo"></div>
+<div id="call-svg-demo"></div>
 
-        //生成圆所需的坐标数据
-        dataset=[{"cx":80,"cy":50},{"cx":120,"cy":60},{"cx":160,"cy":90}]
+<!-- jQuery v2.1.4 -->
+<script src="../js/libs/jquery.min.js"></script>
+<!-- d3的js文件 -->
+<script type="text/javascript" src="../js/libs/d3.v3.js"></script>
+<script type="text/javascript">
+    //向body标签增加svg子元素
+    var each_svg = d3.select('#each-svg-demo')
+        .append('svg')
+        .attr({
+            "width": 700,
+            "height": 200,
+        });
 
-        var color = d3.scale.category20();
-        //追加测试元素
-        each_svg.selectAll("circle")
-            .data(dataset)
-            .enter()
-            .append('circle')
-            .attr({
-                cx: function(d){return d.cx},
-                cy: function(d){return d.cy},
-                r: 5
-            });
+    //生成圆所需的坐标数据
+    dataset = [{"cx": 80, "cy": 50}, {"cx": 120, "cy": 60}, {"cx": 160, "cy": 90}]
 
-        //过渡开始前统一设置元素属性，结束后删除元素
-        each_svg.selectAll('circle')
-            .transition()   //开启过渡
-            .duration(1500) //设置过渡持续时间1500毫秒
-            .attr({
-                "opacity":0,"r":50
+    var color = d3.scale.category20();
+    //追加测试元素
+    each_svg.selectAll("circle")
+        .data(dataset)
+        .enter()
+        .append('circle')
+        .attr({
+            cx: function (d) {
+                return d.cx
+            },
+            cy: function (d) {
+                return d.cy
+            },
+            r: 5
+        });
+
+    //过渡开始前统一设置元素属性，结束后删除元素
+    each_svg.selectAll('circle')
+        .transition()   //开启过渡
+        .duration(1500) //设置过渡持续时间1500毫秒
+        .attr({
+            "opacity": 0, "r": 50
+        })
+        .each("start", function (d, i) {
+            d3.select(this).attr({
+                "fill": "none",
+                "stroke": color(i),
+                "stroke-width": 5,
+                "opacity": 1
             })
-            .each("start", function (d, i) {
-                d3.select(this).attr({
-                    "fill": "none",
-                    "stroke": color(i),
-                    "stroke-width": 5,
-                    "opacity":1
-                })
-            })
-            .each("end", function (d, i) {
-                d3.select(this).remove();
-            });
+        })
+        .each("end", function (d, i) {
+            d3.select(this).remove();
+        });
 
-        //向body标签增加svg子元素
-        var call_svg = d3.select('#call-svg-demo')
-            .append('svg')  
-            .attr({
-                "width": 700,
-                "height": 200,
-            });
+    //向body标签增加svg子元素
+    var call_svg = d3.select('#call-svg-demo')
+        .append('svg')
+        .attr({
+            "width": 700,
+            "height": 200,
+        });
 
-        
-        //追加测试元素
-        call_svg.selectAll("circle")
-            .data(dataset)
-            .enter()
-            .append('circle')
-            .attr({
-                cx: function(d){return d.cx},
-                cy: function(d){return d.cy},
-                r: 5
-            });
-        
-        //设置动画结束时，rect元素的属性 
-        function setEndAttr(transition){
-            transition.attr({   
-                "opacity":0,"r":50
-            })
-        }
-        
-        //使用call函数调用可重用的属性设置函数
-        call_svg.selectAll('circle')
-            .transition()
-            .duration(1500)
-            .call(setEndAttr)   //调用setEndAttr函数设置元素属性
-            .each("start", function (d, i) {
-                d3.select(this).attr({
-                    "fill": "none",
-                    "stroke": "tomato",
-                    "stroke-width": 5,
-                    "opacity":1
-                })
-            })
-            .each("end", function (d, i) {
-                d3.select(this).remove();
-            });
 
-    </script>
+    //追加测试元素
+    call_svg.selectAll("circle")
+        .data(dataset)
+        .enter()
+        .append('circle')
+        .attr({
+            cx: function (d) {
+                return d.cx
+            },
+            cy: function (d) {
+                return d.cy
+            },
+            r: 5
+        });
+
+    //设置动画结束时，rect元素的属性
+    function setEndAttr(transition) {
+        transition.attr({
+            "opacity": 0, "r": 50
+        })
+    }
+
+    //使用call函数调用可重用的属性设置函数
+    call_svg.selectAll('circle')
+        .transition()
+        .duration(1500)
+        .call(setEndAttr)   //调用setEndAttr函数设置元素属性
+        .each("start", function (d, i) {
+            d3.select(this).attr({
+                "fill": "none",
+                "stroke": "tomato",
+                "stroke-width": 5,
+                "opacity": 1
+            })
+        })
+        .each("end", function (d, i) {
+            d3.select(this).remove();
+        });
+
+</script>
 </body>
 </html>

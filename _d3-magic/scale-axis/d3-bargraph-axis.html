@@ -16,98 +16,98 @@
 <script src="http://cdn.bootcss.com/d3/3.5.17/d3.js"></script>
 <script>
 
-// 常量设置 ====================
-var dataset = [50, 43, 120, 87, 99, 167, 142];
+    // 常量设置 ====================
+    var dataset = [50, 43, 120, 87, 99, 167, 142];
 
-// svg长宽
-var width  = 400;   
-var height = 400;  
+    // svg长宽
+    var width = 400;
+    var height = 400;
 
-// svg外边框
-var padding = { top: 30 , right: 30, bottom: 30, left: 30 }; 
+    // svg外边框
+    var padding = {top: 30, right: 30, bottom: 30, left: 30};
 
-// 坐标轴轴宽度
-var xAxisWidth = 300;
-var yAxisWidth = 300;
+    // 坐标轴轴宽度
+    var xAxisWidth = 300;
+    var yAxisWidth = 300;
 
-// 创建svg ========================
-var svg = d3.select("main")         
-            .append("svg")          
-            .attr("width", width)   
-            .attr("height", height);
-            
-          
-// 创建比例尺 ==================
-// 序数比例尺
-var xScale = d3.scale.ordinal()
-                .domain(d3.range(dataset.length))
-                .rangeRoundBands([0,xAxisWidth],0.2);
-// 线性比例尺
-var yScale = d3.scale.linear()
-                .domain([0,d3.max(dataset)])
-                .range([0,yAxisWidth]);   
-      
-    
-// 画柱状图
-// 其实坐标轴和柱状图是独立的
-var rect = svg.selectAll("rect")
-                .data(dataset)      
-                .enter()            
-                .append("rect") 
-                .attr("fill","steelblue")       
-                .attr("x", function(d,i){      
-                    return padding.left + xScale(i);
-                })
-                .attr("y", function(d){     
-                    return height- padding.bottom - yScale(d);
-                })
-                .attr("width", xScale.rangeBand())   
-                .attr("height", function(d){          
-                    return yScale(d);
-                });
- 
-// 柱状图的文字                
-var text = svg.selectAll("text")
-                .data(dataset)          
-                .enter()              
-                .append("text")        
-                .attr("fill","white")
-                .attr("font-size","14px")
-                .attr("text-anchor","middle")
-                .attr("x", function(d,i){
-                    return padding.left + xScale(i);
-                })
-                .attr("y", function(d){
-                    return height- padding.bottom - yScale(d);
-                })
-                .attr("dx",xScale.rangeBand()/2)
-                .attr("dy","1em")
-                .text(function(d){
-                    return d;
-                });
+    // 创建svg ========================
+    var svg = d3.select("main")
+        .append("svg")
+        .attr("width", width)
+        .attr("height", height);
 
-// x轴
-var xAxis = d3.svg.axis()
-                .scale(xScale)
-                .orient("bottom");
 
-// y轴
-yScale.range([yAxisWidth,0]); // 翻转y轴坐标轴刻度                
-var yAxis = d3.svg.axis()
-                .scale(yScale)
-                .orient("left");
+    // 创建比例尺 ==================
+    // 序数比例尺
+    var xScale = d3.scale.ordinal()
+        .domain(d3.range(dataset.length))
+        .rangeRoundBands([0, xAxisWidth], 0.2);
+    // 线性比例尺
+    var yScale = d3.scale.linear()
+        .domain([0, d3.max(dataset)])
+        .range([0, yAxisWidth]);
 
-// 添加分组元素g                
-svg.append("g")
-        .attr("class","axis")
-        .attr("transform","translate(" + padding.left + "," + (height - padding.bottom) +  ")")
+
+    // 画柱状图
+    // 其实坐标轴和柱状图是独立的
+    var rect = svg.selectAll("rect")
+        .data(dataset)
+        .enter()
+        .append("rect")
+        .attr("fill", "steelblue")
+        .attr("x", function (d, i) {
+            return padding.left + xScale(i);
+        })
+        .attr("y", function (d) {
+            return height - padding.bottom - yScale(d);
+        })
+        .attr("width", xScale.rangeBand())
+        .attr("height", function (d) {
+            return yScale(d);
+        });
+
+    // 柱状图的文字
+    var text = svg.selectAll("text")
+        .data(dataset)
+        .enter()
+        .append("text")
+        .attr("fill", "white")
+        .attr("font-size", "14px")
+        .attr("text-anchor", "middle")
+        .attr("x", function (d, i) {
+            return padding.left + xScale(i);
+        })
+        .attr("y", function (d) {
+            return height - padding.bottom - yScale(d);
+        })
+        .attr("dx", xScale.rangeBand() / 2)
+        .attr("dy", "1em")
+        .text(function (d) {
+            return d;
+        });
+
+    // x轴
+    var xAxis = d3.svg.axis()
+        .scale(xScale)
+        .orient("bottom");
+
+    // y轴
+    yScale.range([yAxisWidth, 0]); // 翻转y轴坐标轴刻度
+    var yAxis = d3.svg.axis()
+        .scale(yScale)
+        .orient("left");
+
+    // 添加分组元素g
+    svg.append("g")
+        .attr("class", "axis")
+        .attr("transform", "translate(" + padding.left + "," + (height - padding.bottom) + ")")
         .call(xAxis);
-            
-svg.append("g")
-        .attr("class","axis")
-        .attr("transform","translate(" + padding.left + "," + (height - padding.bottom - yAxisWidth) +  ")")
+
+    svg.append("g")
+        .attr("class", "axis")
+        .attr("transform", "translate(" + padding.left + "," + (height - padding.bottom - yAxisWidth) + ")")
         .call(yAxis);
-        
-</script>    
+
+</script>
 </body>
 </html>

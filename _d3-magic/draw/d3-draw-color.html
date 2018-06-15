@@ -18,46 +18,46 @@
 
 <script src="http://cdn.bootcss.com/d3/3.5.17/d3.js"></script>
 <script>
-// RGB =======================
-var color1 = d3.rgb(40,80,0);
-var color2 = d3.rgb("red");
-var color3 = d3.rgb("rgb(0,255,255)");
+    // RGB =======================
+    var color1 = d3.rgb(40, 80, 0);
+    var color2 = d3.rgb("red");
+    var color3 = d3.rgb("rgb(0,255,255)");
 
-console.log( color1.brighter(2) ); 
-        //将color1的颜色变亮，返回值的颜色为 r: 81, g: 163, b:0
-        // 乘法的倍数??
-console.log( color1 ); // 原颜色值不变，依然是 r: 40, g: 80, b:0
+    console.log(color1.brighter(2));
+    //将color1的颜色变亮，返回值的颜色为 r: 81, g: 163, b:0
+    // 乘法的倍数??
+    console.log(color1); // 原颜色值不变，依然是 r: 40, g: 80, b:0
 
-console.log( color2.darker(2) ); // r: 124, g: 0, b:0
-console.log( color2 ); // 依然是 r: 255, g: 0, b:0
+    console.log(color2.darker(2)); // r: 124, g: 0, b:0
+    console.log(color2); // 依然是 r: 255, g: 0, b:0
 
-console.log( color3.hsl() ); // h: 180, s: 1, l: 0.5
-console.log( color3.toString() ); //输出#00ffff
+    console.log(color3.hsl()); // h: 180, s: 1, l: 0.5
+    console.log(color3.toString()); //输出#00ffff
 
-// HSL =========================
-// 美术人员更喜欢HSL颜色
-var hsl = d3.hsl(120,1.0,0.5);
+    // HSL =========================
+    // 美术人员更喜欢HSL颜色
+    var hsl = d3.hsl(120, 1.0, 0.5);
 
-console.log( hsl.brighter() ); //返回的对象中，h:120, s:1.0, l:0.714
-console.log( hsl.darker() );   // h:120, s:1.0, l:0.35
-console.log( hsl.rgb() );      //r:0, g:255, b:0
-console.log( hsl.toString() ); //输出#00ff00
+    console.log(hsl.brighter()); //返回的对象中，h:120, s:1.0, l:0.714
+    console.log(hsl.darker());   // h:120, s:1.0, l:0.35
+    console.log(hsl.rgb());      //r:0, g:255, b:0
+    console.log(hsl.toString()); //输出#00ff00
 
-// interpolation 插值 ===========
-// 返回两个颜色之间的颜色
-// 也可以处理数值和字符串
-var a = d3.rgb(255,0,0);    //红色
-var b = d3.rgb(0,255,0);    //绿色
-var compute = d3.interpolate(a,b);
+    // interpolation 插值 ===========
+    // 返回两个颜色之间的颜色
+    // 也可以处理数值和字符串
+    var a = d3.rgb(255, 0, 0);    //红色
+    var b = d3.rgb(0, 255, 0);    //绿色
+    var compute = d3.interpolate(a, b);
 
-console.log( compute(0) );      //输出#ff0000 红色
-console.log( compute(0.2) );    //输出#cc3300
-console.log( compute(0.5) );    //输出#808000
-console.log( compute(1) );      //输出#00ff00 绿色
+    console.log(compute(0));      //输出#ff0000 红色
+    console.log(compute(0.2));    //输出#cc3300
+    console.log(compute(0.5));    //输出#808000
+    console.log(compute(1));      //输出#00ff00 绿色
 
-console.log( compute(2) );      //输出#00ff00 绿色
-console.log( compute(-1) );     //输出#ff0000 红色
+    console.log(compute(2));      //输出#00ff00 绿色
+    console.log(compute(-1));     //输出#ff0000 红色
 
-</script>    
+</script>
 </body>
 </html>

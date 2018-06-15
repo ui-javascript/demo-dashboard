@@ -2,39 +2,39 @@
 <html>
 
 <head>
-  <meta charset="utf-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>attrTween属性</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>attrTween属性</title>
 </head>
 
 <body>
 
-  <!-- svg区 -->
-  <main></main>
+<!-- svg区 -->
+<main></main>
 
-  <script src="http://cdn.bootcss.com/d3/3.5.17/d3.js"></script>
-  <script>
+<script src="http://cdn.bootcss.com/d3/3.5.17/d3.js"></script>
+<script>
     // 创建svg
     var width = 500,
-      height = 500;
+        height = 500;
     var svg = d3.select("main").append("svg")
-      .attr("width", width).attr("height", height);
+        .attr("width", width).attr("height", height);
 
     var rect = svg.append("rect")
-      .attr("fill", "steelblue")
-      .attr("x", 10).attr("y", 10)
-      .attr("width", 100).attr("height", 30);
+        .attr("fill", "steelblue")
+        .attr("x", 10).attr("y", 10)
+        .attr("width", 100).attr("height", 30);
 
     // 属性变化的中间值是插值函数计算的
     var rectTran = rect.transition()
-      .duration(2000)
-      .attrTween("width", function(d, i, a) {
-        return function(t) {
-          // console.log(t);
-          return Number(a) + t * 300;
-        }
-      })
-      .style("fill", "red");
+        .duration(2000)
+        .attrTween("width", function (d, i, a) {
+            return function (t) {
+                // console.log(t);
+                return Number(a) + t * 300;
+            }
+        })
+        .style("fill", "red");
     // d是被绑定的数据
     // i是索引号
     // a是width的初始值
@@ -42,25 +42,25 @@
     // t的范围是[0,1]
 
     var text = svg.append("text")
-      .attr("fill", "white")
-      .attr("x", 100).attr("y", 10)
-      .attr("dy", "1.2em")
-      .attr("text-anchor", "end")
-      .text(100);
+        .attr("fill", "white")
+        .attr("x", 100).attr("y", 10)
+        .attr("dy", "1.2em")
+        .attr("text-anchor", "end")
+        .text(100);
 
     var initx = text.attr("x"),
-      initText = text.text();
+        initText = text.text();
 
     var textTran = text.transition()
-      .duration(2000)
-      .tween("text", function() {
-        return function(t) {
-          d3.select(this)
-            .attr("x", Number(initx) + t * 300)
-            .text(Math.floor(Number(initText) + t * 300));
-        }
-      });
-  </script>
+        .duration(2000)
+        .tween("text", function () {
+            return function (t) {
+                d3.select(this)
+                    .attr("x", Number(initx) + t * 300)
+                    .text(Math.floor(Number(initText) + t * 300));
+            }
+        });
+</script>
 </body>
 
 </html>

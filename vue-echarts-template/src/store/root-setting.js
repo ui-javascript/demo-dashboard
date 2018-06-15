@@ -13,8 +13,8 @@ const mutations = {};
 const actions = {};
 
 export default {
-   state: initialState,
-   getters,
-   mutations,
-   actions
+    state: initialState,
+    getters,
+    mutations,
+    actions
 };

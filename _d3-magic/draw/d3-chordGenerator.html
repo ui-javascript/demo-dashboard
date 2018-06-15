@@ -19,56 +19,64 @@
 
 <script src="http://cdn.bootcss.com/d3/3.5.17/d3.js"></script>
 <script>
-// 创建svg
-var width  = 500;   
-var height = 500;  
-var svg = d3.select("main")         
-            .append("svg")         
-            .attr("width", width)   
-            .attr("height", height);
+    // 创建svg
+    var width = 500;
+    var height = 500;
+    var svg = d3.select("main")
+        .append("svg")
+        .attr("width", width)
+        .attr("height", height);
 
-// 共5个访问器
-// var dataset = { source:{ 
-//                     startAngle: 0.2 , 
-//                     endAngle: Math.PI * 0.3 , 
-//                     radius: 100 },
-//                 target:{ 
-//                     startAngle: Math.PI * 1.0 , 
-//                     endAngle: Math.PI * 1.6 , 
-//                     radius:100 } };
+    // 共5个访问器
+    // var dataset = { source:{
+    //                     startAngle: 0.2 ,
+    //                     endAngle: Math.PI * 0.3 ,
+    //                     radius: 100 },
+    //                 target:{
+    //                     startAngle: Math.PI * 1.0 ,
+    //                     endAngle: Math.PI * 1.6 ,
+    //                     radius:100 } };
 
-var dataset = {
-    startArc:{
-        start: 0.2,
-        end: Math.PI * 0.3,
-        radius: 100
-    },
-    endArc:{
-        start: Math.PI * 1.0,
-        end: Math.PI * 1.6,
-        radius: 100
+    var dataset = {
+        startArc: {
+            start: 0.2,
+            end: Math.PI * 0.3,
+            radius: 100
+        },
+        endArc: {
+            start: Math.PI * 1.0,
+            end: Math.PI * 1.6,
+            radius: 100
+        }
     }
-}
 
-//创建一个弦生成器
-// var chord = d3.svg.chord();
+    //创建一个弦生成器
+    // var chord = d3.svg.chord();
 
-var chord = d3.svg.chord()
-              .source(function(d) {return d.startArc; })
-              .target(function(d) {return d.endArc; })
-              .radius(200)
-              .startAngle(function(d) {return d.start; })
-              .endAngle(function(d) {return d.end; });
+    var chord = d3.svg.chord()
+        .source(function (d) {
+            return d.startArc;
+        })
+        .target(function (d) {
+            return d.endArc;
+        })
+        .radius(200)
+        .startAngle(function (d) {
+            return d.start;
+        })
+        .endAngle(function (d) {
+            return d.end;
+        });
 
 
-//添加路径
-svg.append("path")
-    .attr("d",chord(dataset)  ) 
-    .attr("transform","translate(200,200)")
-    .attr("fill","yellow")
-    .attr("stroke","black")
-    .attr("stroke-width",3);  
- 
-</script>    
+    //添加路径
+    svg.append("path")
+        .attr("d", chord(dataset))
+        .attr("transform", "translate(200,200)")
+        .attr("fill", "yellow")
+        .attr("stroke", "black")
+        .attr("stroke-width", 3);
+
+</script>
 </body>
 </html>

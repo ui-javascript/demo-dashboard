@@ -13,37 +13,37 @@
 </aside>
 
 <script src="../js/libs/d3.min.js" charset="utf-8"></script>
-<script>  
-// 创建svg
-var width  = 500;   
-var height = 500;    
-var svg = d3.select("main")         
-            .append("svg")    
-            .attr("width", width)  
-            .attr("height", height);
+<script>
+    // 创建svg
+    var width = 500;
+    var height = 500;
+    var svg = d3.select("main")
+        .append("svg")
+        .attr("width", width)
+        .attr("height", height);
 
-// x比例尺          
-var xScale = d3.scale.linear()
-                .domain([0,10])
-                .range([0,300]);
-// x坐标轴                
-var xAxis = d3.svg.axis()
-                .scale(xScale)
-                .orient("bottom");
+    // x比例尺
+    var xScale = d3.scale.linear()
+        .domain([0, 10])
+        .range([0, 300]);
+    // x坐标轴
+    var xAxis = d3.svg.axis()
+        .scale(xScale)
+        .orient("bottom");
 
-// 分组元素                
-var g = svg.append("g")
-            .attr("class","axis")
-            .attr("transform","translate(50,200)")
-            .call(xAxis);
+    // 分组元素
+    var g = svg.append("g")
+        .attr("class", "axis")
+        .attr("transform", "translate(50,200)")
+        .call(xAxis);
 
-// 改变定义域
-xScale.domain([0,50]);
-            
-g.transition()
-    .duration(2000)
-    .call(xAxis); // 再次操作坐标轴
-        
-</script>     
+    // 改变定义域
+    xScale.domain([0, 50]);
+
+    g.transition()
+        .duration(2000)
+        .call(xAxis); // 再次操作坐标轴
+
+</script>
 </body>
 </html>

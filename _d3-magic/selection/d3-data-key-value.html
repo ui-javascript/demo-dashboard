@@ -9,40 +9,42 @@
 <body>
 <main>
 
-<p></p>
-<p></p>
-<p></p>
+    <p></p>
+    <p></p>
+    <p></p>
 
 </main>
 
 <!-- <script src="../js/libs/d3.v3.min.js"></script> -->
 <script src="http://cdn.bootcss.com/d3/3.5.17/d3.js"></script>
 <script>
-// 数据 ============================
-var persons = [{ id: 3, name:""},
-               { id: 4, name:""},
-               { id: 5, name:""}];
+    // 数据 ============================
+    var persons = [{id: 3, name: ""},
+        {id: 4, name: ""},
+        {id: 5, name: ""}];
 
-var pSet = d3.select("main").selectAll("p");
+    var pSet = d3.select("main").selectAll("p");
 
-pSet.data(persons)
-    .text(function(d) {
-        return d.id + " : " + d.name;
-    });
+    pSet.data(persons)
+        .text(function (d) {
+            return d.id + " : " + d.name;
+        });
 
-// 更新数据 ========================
-persons = [{ id: 4, name:"李四"},
-           { id: 3, name:"张三"},
-           { id: 5, name:"王五"}];
-// key value 排序 ===================
-pSet.data(persons, function(d) { return d.id; })
-    .each(function(d, i) {
-        d.age = 20;
+    // 更新数据 ========================
+    persons = [{id: 4, name: "李四"},
+        {id: 3, name: "张三"},
+        {id: 5, name: "王五"}];
+    // key value 排序 ===================
+    pSet.data(persons, function (d) {
+        return d.id;
     })
-    .text(function(d) {
-        return d.id + " : " + d.name + " , " + d.age;
-    });
-    
-</script>    
+        .each(function (d, i) {
+            d.age = 20;
+        })
+        .text(function (d) {
+            return d.id + " : " + d.name + " , " + d.age;
+        });
+
+</script>
 </body>
 </html>

@@ -10,14 +10,14 @@ import charts from './modules/charts';
 Vue.use(Vuex);
 
 const modules = {
-   basic,
-   charts
+    basic,
+    charts
 };
 
 const store = new Vuex.Store({
-   ...rootSetting,
-   modules,
-   strict: process.env.NODE_ENV !== 'production'
+    ...rootSetting,
+    modules,
+    strict: process.env.NODE_ENV !== 'production'
 });
 
 export default store;

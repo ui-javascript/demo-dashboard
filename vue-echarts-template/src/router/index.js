@@ -18,74 +18,74 @@ import CandlestickChart from '@/views/CandlestickChart';
 Vue.use(Router);
 
 const router = new Router({
-   mode: 'history',
-   routes: [
-      {
-         path: '/',
-         name: 'basic',
-         component: Basic,
-         children: [
-            {
-               path: 'line',
-               name: 'lineChart',
-               component: LineChart
-            },
-            {
-               path: 'bar',
-               name: 'barChart',
-               component: BarChart
-            },
-            {
-               path: 'pie',
-               name: 'pieChart',
-               component: PieChart
-            },
-            {
-               path: 'scatter',
-               name: 'scatterChart',
-               component: ScatterChart
-            },
-            {
-               path: 'radar',
-               name: 'radarChart',
-               component: RadarChart
-            },
-            {
-               path: 'tree',
-               name: 'treeChart',
-               component: TreeChart
-            },
-            {
-               path: 'treemap',
-               name: 'treemapChart',
-               component: TreeMapChart
-            },
-            {
-               path: 'sunburst',
-               name: 'sunburstChart',
-               component: SunburstChart
-            },
-            {
-               path: 'boxplot',
-               name: 'boxplotChart',
-               component: BoxplotChart
-            },
-            {
-               path: 'candlestick',
-               name: 'candlestickChart',
-               component: CandlestickChart
-            },
-            {
-               path: '*',
-               redirect: 'line'
-            }
-         ]
-      },
-      {
-         path: '/*',
-         redirect: '/'
-      }
-   ]
+    mode: 'history',
+    routes: [
+        {
+            path: '/',
+            name: 'basic',
+            component: Basic,
+            children: [
+                {
+                    path: 'line',
+                    name: 'lineChart',
+                    component: LineChart
+                },
+                {
+                    path: 'bar',
+                    name: 'barChart',
+                    component: BarChart
+                },
+                {
+                    path: 'pie',
+                    name: 'pieChart',
+                    component: PieChart
+                },
+                {
+                    path: 'scatter',
+                    name: 'scatterChart',
+                    component: ScatterChart
+                },
+                {
+                    path: 'radar',
+                    name: 'radarChart',
+                    component: RadarChart
+                },
+                {
+                    path: 'tree',
+                    name: 'treeChart',
+                    component: TreeChart
+                },
+                {
+                    path: 'treemap',
+                    name: 'treemapChart',
+                    component: TreeMapChart
+                },
+                {
+                    path: 'sunburst',
+                    name: 'sunburstChart',
+                    component: SunburstChart
+                },
+                {
+                    path: 'boxplot',
+                    name: 'boxplotChart',
+                    component: BoxplotChart
+                },
+                {
+                    path: 'candlestick',
+                    name: 'candlestickChart',
+                    component: CandlestickChart
+                },
+                {
+                    path: '*',
+                    redirect: 'line'
+                }
+            ]
+        },
+        {
+            path: '/*',
+            redirect: '/'
+        }
+    ]
 });
 
 export default router;

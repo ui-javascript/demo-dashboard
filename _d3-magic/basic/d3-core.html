@@ -17,29 +17,33 @@
         table {
             margin: 20px;
             background-color: #eee;
-            font-weight:bold;
+            font-weight: bold;
         }
 
         td {
             padding: 8px;
         }
-        
+
         td.selected {
             background-color: #FF5C00;
             color: white;
         }
-        .even{
-            fill:purple;            
+
+        .even {
+            fill: purple;
         }
-        .odd{
-            fill:tomato;
+
+        .odd {
+            fill: tomato;
         }
-        .stroke{
-            stroke:deepskyblue;
-            stroke-width:5;
+
+        .stroke {
+            stroke: deepskyblue;
+            stroke-width: 5;
         }
-        .opacity{
-            opacity:0.5;
+
+        .opacity {
+            opacity: 0.5;
         }
     </style>
 </head>
@@ -47,99 +51,109 @@
 
 <div class="container">
 
-  <table>
-    <tr>
-      <td>苹果</td> 
-      <td>香蕉</td>
-      <td>西瓜</td>
-    </tr>
-    <tr>
-      <td>桃子</td> 
-      <td id="test">草莓</td>
-      <td>菠萝</td>
-    </tr>
-  </table>
+    <table>
+        <tr>
+            <td>苹果</td>
+            <td>香蕉</td>
+            <td>西瓜</td>
+        </tr>
+        <tr>
+            <td>桃子</td>
+            <td id="test">草莓</td>
+            <td>菠萝</td>
+        </tr>
+    </table>
 
-  <table>
-    <tr>
-      <td>可乐</td>
-      <td>牛奶</td>
-    </tr>
-    <tr>
-      <td>绿茶</td>
-      <td class="test">啤酒</td>
-    </tr>
-  </table>
+    <table>
+        <tr>
+            <td>可乐</td>
+            <td>牛奶</td>
+        </tr>
+        <tr>
+            <td>绿茶</td>
+            <td class="test">啤酒</td>
+        </tr>
+    </table>
 
 </div> <!-- /. container -->
 
-    <!-- jQuery v2.1.4 -->
-    <script src="../js/libs/jquery.min.js"></script>
-    <!-- Bootstrap的js文件 -->
-    <!-- <script src="js/libs/bootstrap.min.js"></script> -->
-    <!-- d3的js文件 -->
-    <script type="text/javascript" src="../js/libs/d3.v3.js"></script>
-    <script type="text/javascript">
-        d3.select("td").classed("selected",true); 
-        d3.select("#test").classed("selected",true);   
-        d3.select(".test").classed("selected",true);    
-        //设置第一个类名为".test"的标签元素的背景色为橘黄色，字体颜色为白色
-        
-        d3.select(document.body).on("click",function(){ 
-            console.log(d3.select(this));
-            d3.select(this).style("color","green");
-        }); //body监听单击事件，单击body区域设置字体的颜色变为绿色
+<!-- jQuery v2.1.4 -->
+<script src="../js/libs/jquery.min.js"></script>
+<!-- Bootstrap的js文件 -->
+<!-- <script src="js/libs/bootstrap.min.js"></script> -->
+<!-- d3的js文件 -->
+<script type="text/javascript" src="../js/libs/d3.v3.js"></script>
+<script type="text/javascript">
+    d3.select("td").classed("selected", true);
+    d3.select("#test").classed("selected", true);
+    d3.select(".test").classed("selected", true);
+    //设置第一个类名为".test"的标签元素的背景色为橘黄色，字体颜色为白色
 
-        d3.select("tr").selectAll("td").classed("selected",true);   
-        //选择第一行的所有列，设置选中元素的背景色为橘黄色
-        
-        d3.selectAll("tr").select("td").classed("selected",true);   
-        //选择所有的行，并选择每行的第一列，设置选中元素的背景色为橘黄色
-        
-        //绘制矩形的数据
-        var dataset = [ 5, 10, 15, 20, 25 ];  
-        
-        //创建SVG
-        var svg = d3.select("body")  
-                .append("svg")  
-                .attr("width", 960) //一次设置一个属性值
-                .attr("height", 500);
+    d3.select(document.body).on("click", function () {
+        console.log(d3.select(this));
+        d3.select(this).style("color", "green");
+    }); //body监听单击事件，单击body区域设置字体的颜色变为绿色
 
-        //创建矩形
-        var rects = svg.selectAll("rect")
-                .data(dataset)
-                .enter()
-                .append("rect")
-                .attr({ //一次设置多个属性值
-                    "x":function(d,i){ return 20+i*160/dataset.length;},    //使用函数设置属性值
-                    "y":function(d){ return 20;},
-                    "width":20,
-                    "height":100
-                })
-                .attr("fill","steelblue");
+    d3.select("tr").selectAll("td").classed("selected", true);
+    //选择第一行的所有列，设置选中元素的背景色为橘黄色
 
-        //使用函数值绑定元素的CSS类
-        rects.classed({
-            "odd":function(d,i){ return i%2==0?true:false;},
-            "even":function(d,i){ return i%2==0?false:true;}
-        });
+    d3.selectAll("tr").select("td").classed("selected", true);
+    //选择所有的行，并选择每行的第一列，设置选中元素的背景色为橘黄色
 
-        //设置元素的描边属性为函数的返回值
-        rects.style({
-            "stroke-width": 5,
-            "stroke": function(d,i){ return "rgb("+10*d+","+10*(25-d)+","+d+")"; }
-        });
-         
-        //切换矩形的CSS类     
-        rects.on("click",function(){
-            var rect=d3.select(this);
-            if(rect.classed("stroke opacity")){ //取得元素是否绑定指定名称的CSS类
-                rect.classed("stroke opacity",false);   //移除元素绑定的CSS类
-            } else{
-                rect.classed("stroke opacity",true);    //给元素绑定CSS类，可以绑定多个类
-            }
-        });
+    //绘制矩形的数据
+    var dataset = [5, 10, 15, 20, 25];
 
-    </script>
+    //创建SVG
+    var svg = d3.select("body")
+        .append("svg")
+        .attr("width", 960) //一次设置一个属性值
+        .attr("height", 500);
+
+    //创建矩形
+    var rects = svg.selectAll("rect")
+        .data(dataset)
+        .enter()
+        .append("rect")
+        .attr({ //一次设置多个属性值
+            "x": function (d, i) {
+                return 20 + i * 160 / dataset.length;
+            },    //使用函数设置属性值
+            "y": function (d) {
+                return 20;
+            },
+            "width": 20,
+            "height": 100
+        })
+        .attr("fill", "steelblue");
+
+    //使用函数值绑定元素的CSS类
+    rects.classed({
+        "odd": function (d, i) {
+            return i % 2 == 0 ? true : false;
+        },
+        "even": function (d, i) {
+            return i % 2 == 0 ? false : true;
+        }
+    });
+
+    //设置元素的描边属性为函数的返回值
+    rects.style({
+        "stroke-width": 5,
+        "stroke": function (d, i) {
+            return "rgb(" + 10 * d + "," + 10 * (25 - d) + "," + d + ")";
+        }
+    });
+
+    //切换矩形的CSS类
+    rects.on("click", function () {
+        var rect = d3.select(this);
+        if (rect.classed("stroke opacity")) { //取得元素是否绑定指定名称的CSS类
+            rect.classed("stroke opacity", false);   //移除元素绑定的CSS类
+        } else {
+            rect.classed("stroke opacity", true);    //给元素绑定CSS类，可以绑定多个类
+        }
+    });
+
+</script>
 </body>
 </html>
