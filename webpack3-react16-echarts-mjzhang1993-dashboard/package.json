@@ -5,6 +5,7 @@
    "author": "mjzhang1993 <mjzhang1993@163.com>",
    "license": "MIT",
    "scripts": {
+      "install:yarn": "yarn install",
       "install": "cnpm install",
       "remove": "rimraf node_modules",
       "dev": "node build/dev-server.js",

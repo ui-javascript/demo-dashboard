@@ -6,7 +6,8 @@
   "author": "mjzhang1993 <mjzhang1993@163.com>",
   "private": true,
   "scripts": {
-    "install": "cnpm install",
+    "install:cnpm": "cnpm install",
+    "install:yarn": "yarn install",
     "remove": "rimraf node_modules",
     "dev": "node build/dev-server.js",
     "start": "npm run dev",
