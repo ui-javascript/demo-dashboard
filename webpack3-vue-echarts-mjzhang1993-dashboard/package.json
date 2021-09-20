@@ -73,7 +73,7 @@
     "webpack-dev-middleware": "2.0.4",
     "webpack-hot-middleware": "2.21.0",
     "webpack-merge": "4.1.1",
-    "zrender": "^4.0.1"
+    "zrender": "^5.2.1"
   },
   "engines": {
     "node": ">= 4.0.0",
